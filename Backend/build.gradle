@@ -19,10 +19,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter:2.6.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.1'
+    implementation 'org.springframework.data:spring-data-mongodb-parent:3.3.0'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.1'
 }
 
 test {
