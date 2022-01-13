@@ -2,7 +2,6 @@ package it.unicam.cs.ids.smartchalet.Model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.GregorianCalendar;
@@ -17,6 +16,10 @@ public class NonAuthenticatedUser implements GenericUser {
     private String name;
     private String surname;
     private String email;
+
+    public NonAuthenticatedUser(){
+        this(null,null,null,null);
+    }
 
     public NonAuthenticatedUser(String username, String name, String surname, String email) {
         this.username = null;

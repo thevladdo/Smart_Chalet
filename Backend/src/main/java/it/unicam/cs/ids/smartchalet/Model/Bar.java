@@ -2,7 +2,6 @@ package it.unicam.cs.ids.smartchalet.Model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashMap;

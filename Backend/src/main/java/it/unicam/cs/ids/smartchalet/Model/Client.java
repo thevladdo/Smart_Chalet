@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class Client implements AuthenticatedUser {
         return true;
     }
 
-    public List getCart() {
+    public ArrayList<ItemBar> getCart() {
         return null;
     }
 
