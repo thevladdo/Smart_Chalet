@@ -5,29 +5,29 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
 
+/**
+ * This class represent a beach object.
+ * Is needed to set the quantity of Loungers and Chairs.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Beach {
 
     private ArrayList<ArrayList<BeachUmbrella>> beach;
-    private int qntLounger;
-    private int qntBeachChairs;
+    private int qtaLounger;
+    private int qtaBeachChairs;
     private static Beach singleBeach;
 
-    private Beach(){
-        this(0,0);
-    }
-
-    private Beach(int qntLounger, int qntBeachChairs) {
+    private Beach() {
         this.beach = new ArrayList<>();
-        this.qntLounger = qntLounger;
-        this.qntBeachChairs = qntBeachChairs;
+        this.qtaLounger = 0;
+        this.qtaBeachChairs = 0;
     }
 
-    public static Beach singletonBeach(int qntLounger, int qntBeachChairs){
+    public static Beach singletonBeach(){
         if (singleBeach == null) {
-            singleBeach = new Beach(qntLounger,qntBeachChairs);
+            singleBeach = new Beach();
         }
         return singleBeach;
     }

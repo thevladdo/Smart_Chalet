@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,7 +37,6 @@ public  class Qr {
         BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
         LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
         try {
             Result result = new MultiFormatReader().decode(bitmap);
             return Integer.parseInt(result.getText());

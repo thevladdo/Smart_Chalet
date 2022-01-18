@@ -1,10 +1,10 @@
 package it.unicam.cs.ids.smartchalet.Model.Handlers;
 
-import it.unicam.cs.ids.smartchalet.Model.Client;
+import it.unicam.cs.ids.smartchalet.Model.Reservation;
+import it.unicam.cs.ids.smartchalet.Model.Users.Client;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +13,11 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ReservationHandler {
 
-    //TODO ricordarsi! L'integer rappresenta il qrcode, il client va su V perchè un cliente può avere più ombrelloni.
-    private Map<Integer, Client> reservationHandler;
+    private Map<Client,Reservation> handler;
     private static ReservationHandler rvHandler;
 
     private ReservationHandler() {
-        this.reservationHandler = new HashMap<>();
+        this.handler = new HashMap<>();
     }
 
     public static ReservationHandler sigletonReservationHandler(){

@@ -13,9 +13,17 @@ import java.util.Map;
 public class Bar {
 
     private Map<ItemBar, Integer> disponibility;
+    private static Bar singleBar;
 
-    public Bar() {
+    private Bar() {
         this.disponibility = new HashMap<>();
+    }
+
+    public static Bar singletonBar(){
+        if (singleBar == null) {
+            singleBar = new Bar();
+        }
+        return singleBar;
     }
 
 }
