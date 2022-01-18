@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.smartchalet.Service;
 
-import it.unicam.cs.ids.smartchalet.Model.Client;
+import it.unicam.cs.ids.smartchalet.Model.Users.Client;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

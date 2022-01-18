@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.GregorianCalendar;
 
 @Getter
@@ -13,15 +12,17 @@ import java.util.GregorianCalendar;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservation {
 
+    public static int idGenerator = 0;
     private GregorianCalendar date;
-    private BeachUmbrella beachUmbrella;
-    private static int id = 0;
+    private BeachUmbrella umbrella;
+    private int id = 0;
     private Boolean checkReview;
 
-    public Reservation(GregorianCalendar date, BeachUmbrella beachUmbrella) {
+    public Reservation(GregorianCalendar date, BeachUmbrella umbrella, int qtaLounger, int qtaBeachChairs) {
         this.date = date;
-        this.beachUmbrella = beachUmbrella;
-        this.id++;
+        this.umbrella = umbrella;
+        idGenerator++;
+        this.id = idGenerator;
         this.checkReview = true;
     }
 }

@@ -2,24 +2,37 @@ package it.unicam.cs.ids.smartchalet.Model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 
+/**
+ * This class represent a beach object.
+ * Is needed to set the quantity of Loungers and Chairs.
+ */
 @Getter
 @Setter
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Beach {
 
     private ArrayList<ArrayList<BeachUmbrella>> beach;
-    private int qntLounger;
-    private int qntBeachChairs;
+    private int qtaLounger;
+    private int qtaBeachChairs;
+    private static Beach singleBeach;
 
-    public Beach(int qntLounger, int qntBeachChairs) {
+    private Beach() {
         this.beach = new ArrayList<>();
-        this.qntLounger = qntLounger;
-        this.qntBeachChairs = qntBeachChairs;
+        this.qtaLounger = 0;
+        this.qtaBeachChairs = 0;
+    }
+
+    public static Beach singletonBeach(){
+        if (singleBeach == null) {
+            singleBeach = new Beach();
+        }
+        return singleBeach;
+    }
+
+    public void add(BeachUmbrella umbrella, int xPosition, int yPosition) {
+        this.beach.get(xPosition).add(yPosition, umbrella);
     }
 }
