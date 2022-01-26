@@ -1,27 +1,18 @@
 package it.unicam.cs.ids.smartchalet.Model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Activity {
 
-    private int duration;
+    @Id
     private String name;
     private String description;
+    private int duration;
     private int placesAvailable;
-
-
-    public Activity(int duration, String name, String description, int placesAvailable) {
-        this.duration = duration;
-        this.name = name;
-        this.description = description;
-        this.placesAvailable = placesAvailable;
-    }
-
 }

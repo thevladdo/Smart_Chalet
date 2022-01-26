@@ -19,13 +19,16 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter:2.6.2'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.2'
-    implementation 'org.springframework.data:spring-data-mongodb-parent:3.3.0'
     implementation group: 'com.kuisama.zxing', name: 'zxing-spring-boot-starter', version: '1.0.0.RELEASE'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 test {

@@ -1,25 +1,21 @@
 package it.unicam.cs.ids.smartchalet.Model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import it.unicam.cs.ids.smartchalet.OldModel.REFACTORED.ItemBar;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class BarOrder {
 
-    //TODO integer è l'i dell'ombrellone
-    private Map<Integer, ArrayList<ItemBar>> orders;
+    @Id
+    private UUID orderId;
+    private Map<Integer, ArrayList<ItemBar>> order;
 
-
-    public BarOrder(int idBeachUmbrella, ArrayList<ItemBar> items) {
-        this.orders = new HashMap<>();
-    }
 }

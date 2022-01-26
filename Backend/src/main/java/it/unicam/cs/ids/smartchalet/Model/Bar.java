@@ -1,9 +1,10 @@
 package it.unicam.cs.ids.smartchalet.Model;
 
+import it.unicam.cs.ids.smartchalet.OldModel.REFACTORED.ItemBar;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
+import org.springframework.data.annotation.Id;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +13,9 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Bar {
 
-    private Map<ItemBar, Integer> disponibility;
+    @Id
     private static Bar singleBar;
+    private Map<ItemBar, Integer> disponibility;
 
     private Bar() {
         this.disponibility = new HashMap<>();
@@ -25,5 +27,4 @@ public class Bar {
         }
         return singleBar;
     }
-
 }
