@@ -6,8 +6,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
-import it.unicam.cs.ids.smartchalet.OldModel.Handlers.Qr.Qr;
-import it.unicam.cs.ids.smartchalet.OldModel.REFACTORED.BeachUmbrella;
 import it.unicam.cs.ids.smartchalet.Repository.QrRepository;
 
 import javax.imageio.ImageIO;

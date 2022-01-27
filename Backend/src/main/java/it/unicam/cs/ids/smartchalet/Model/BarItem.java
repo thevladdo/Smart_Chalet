@@ -14,7 +14,7 @@ public class BarItem {
     @Id
     private UUID id;
     private double price;
-    private Boolean disponibility;
-    private String details;
+    private int disponibility;
+    private String name;
 
 }
