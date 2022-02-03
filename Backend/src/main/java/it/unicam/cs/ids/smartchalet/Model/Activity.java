@@ -14,5 +14,5 @@ public class Activity {
     private String name;
     private String description;
     private int duration;
-    private int placesAvailable;
+    private int freeSpots;
 }

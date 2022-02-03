@@ -14,6 +14,5 @@ public class Umbrella {
     @Id
     private UUID id;
     private int qntLounger;
-    private int qntBeachChairs;
     private Boolean disponibility;
 }

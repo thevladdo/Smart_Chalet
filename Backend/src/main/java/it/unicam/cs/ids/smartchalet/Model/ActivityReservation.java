@@ -14,6 +14,7 @@ public class ActivityReservation {
 
     @Id
     private UUID id;
+    private String userId;
     private Date date;
     private Activity activity;
     private int capacity;

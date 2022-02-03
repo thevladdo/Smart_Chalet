@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthCredentialRepository extends MongoRepository<AuthCredential,String> {
+
+    AuthCredential.Role findByUsername(String username);
 }

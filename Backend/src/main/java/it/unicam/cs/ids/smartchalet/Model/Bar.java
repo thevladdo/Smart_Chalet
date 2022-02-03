@@ -14,17 +14,17 @@ import java.util.List;
 public class Bar implements Serializable {
 
     @Id
+    private int id;
     private static Bar singleBar;
-    private List<BarItem> items;
+    private ArrayList<BarItem> items;
 
     private Bar() {
+        this.id = 1;
         this.items = new ArrayList<>();
     }
 
     public static Bar singletonBar(){
-        if (singleBar == null) {
-            singleBar = new Bar();
-        }
+        if (singleBar == null) singleBar = new Bar();
         return singleBar;
     }
 }

@@ -8,14 +8,14 @@ import it.unicam.cs.ids.smartchalet.Repository.BarRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RestController
+@Service
 public class BarService {
 
     @Autowired
@@ -24,15 +24,36 @@ public class BarService {
     @Autowired
     private BarItemRepository itemRepository;
 
-    public List<BarItem> getItems(){
-        return repository.findBarBy(Bar.singletonBar()).getItems()
+    private Bar getBar(int id){
+        if(repository.findById(id).isEmpty()) repository.insert(Bar.singletonBar());
+        return repository.findById(id).get();
+    }
+
+    public ArrayList<BarItem> getItems(int id){
+        ArrayList<BarItem> items = getBar(id)
+                .getItems()
                 .stream()
                 .filter(BarItem -> BarItem.getDisponibility()>0)
                 .collect(Collectors.toCollection(ArrayList::new));
+        checkSize(items.size());
+        return items;
     }
 
-    public List<BarItem> getAllItems(){
-        return repository.findBarBy(Bar.singletonBar()).getItems();
+    public ArrayList<BarItem> getItem(String name, int barId){
+        ArrayList<BarItem> items = getItems(barId)
+                .stream()
+                .filter(BarItem -> BarItem.getName().toUpperCase().equals(name.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        checkSize(items.size());
+        return items;
+    }
+
+    private void checkSize(int size){
+        if (size == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No item found");
+    }
+
+    public ArrayList<BarItem> getAllItems(){
+        return repository.findById(1).get().getItems();
     }
 
     public void addItem(@NonNull BarItem toAdd){
@@ -50,7 +71,7 @@ public class BarService {
     }
 
     public boolean checkDisponibility(@NonNull BarOrder order){
-        List<BarItem> notDisponibility = new ArrayList<>();
+        ArrayList<BarItem> notDisponibility = new ArrayList<>();
         for (BarItem item : order.getOrderDetails().keySet()) {
             if(!exist(item)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     item.getName().toUpperCase()+" don't exist");

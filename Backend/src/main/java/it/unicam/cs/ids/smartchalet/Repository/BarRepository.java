@@ -5,7 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BarRepository extends MongoRepository<Bar,Bar> {
-
-    Bar findBarBy(Bar bar);
+public interface BarRepository extends MongoRepository<Bar,Integer> {
 }
