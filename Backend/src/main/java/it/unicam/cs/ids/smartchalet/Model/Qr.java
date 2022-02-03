@@ -11,5 +11,5 @@ import org.springframework.data.annotation.Id;
 public class Qr {
 
     @Id
-    private Integer umbrellaId;
+    private int umbrellaId;
 }

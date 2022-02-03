@@ -14,8 +14,8 @@ public class UmbrellaService {
     private UmbrellaRepository repository;
 
     public Umbrella addLounger(Umbrella umbrella){
-        if(umbrella.getQntLounger() < 2){
-            umbrella.setQntLounger(umbrella.getQntLounger()+1);
+        if(umbrella.getQtyLounger() < 2){
+            umbrella.setQtyLounger(umbrella.getQtyLounger()+1);
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella has already 2 Loungers");
         return repository.save(umbrella);
     }

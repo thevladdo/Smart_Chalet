@@ -13,6 +13,6 @@ public class Umbrella {
 
     @Id
     private UUID id;
-    private int qntLounger;
+    private int qtyLounger;
     private Boolean disponibility;
 }

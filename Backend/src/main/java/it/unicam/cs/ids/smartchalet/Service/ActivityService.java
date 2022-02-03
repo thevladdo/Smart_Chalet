@@ -29,9 +29,8 @@ public class ActivityService {
 
     public Activity updateActivity(@NonNull Activity updated){
         if (repository.findById(updated.getName()).isPresent()) {
-            repository.save(updated);
+            return repository.save(updated);
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activity don't already exist. Try to add it");
-        return updated;
     }
 
     public Activity getByName(@NonNull String name){

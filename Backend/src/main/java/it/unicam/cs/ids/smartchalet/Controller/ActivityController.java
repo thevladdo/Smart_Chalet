@@ -31,4 +31,10 @@ public class ActivityController {
     public Activity update(Activity activity){
         return activityService.updateActivity(activity);
     }
+
+    //GenericUser: Ricerca attività
+    @GetMapping("/search/activity")
+    public Activity searchActivity(String name){
+        return activityService.getByName(name);
+    }
 }

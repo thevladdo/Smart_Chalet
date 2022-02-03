@@ -29,7 +29,7 @@ public class BarService {
         return repository.findById(id).get();
     }
 
-    public ArrayList<BarItem> getItems(int id){
+    public ArrayList<BarItem> getAvailableItems(int id){
         ArrayList<BarItem> items = getBar(id)
                 .getItems()
                 .stream()
@@ -39,13 +39,13 @@ public class BarService {
         return items;
     }
 
-    public ArrayList<BarItem> getItem(String name, int barId){
-        ArrayList<BarItem> items = getItems(barId)
+    public BarItem getItem(String name, int barId){
+        ArrayList<BarItem> items = getAvailableItems(barId)
                 .stream()
-                .filter(BarItem -> BarItem.getName().toUpperCase().equals(name.toLowerCase()))
+                .filter(BarItem -> BarItem.getName().toUpperCase().equals(name.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         checkSize(items.size());
-        return items;
+        return items.get(0);
     }
 
     private void checkSize(int size){
@@ -53,23 +53,38 @@ public class BarService {
     }
 
     public ArrayList<BarItem> getAllItems(){
-        return repository.findById(1).get().getItems();
+        return getBar(1).getItems();
     }
 
-    public void addItem(@NonNull BarItem toAdd){
+    public BarItem addItem(@NonNull BarItem toAdd){
         if(exist(toAdd)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The item is already present");
-        } else Bar.singletonBar().getItems().add(toAdd);
+        } else {
+            Bar.singletonBar().getItems().add(toAdd);
+            itemRepository.insert(toAdd);
+        }
         repository.save(Bar.singletonBar());
+        return toAdd;
     }
 
-    public void removeItem(@NonNull BarItem toRemove){
+    public BarItem removeItem(@NonNull BarItem toRemove){
         if(!exist(toRemove)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The item is not present");
-        } else Bar.singletonBar().getItems().remove(toRemove);
+        } else {
+            Bar.singletonBar().getItems().remove(toRemove);
+            itemRepository.delete(toRemove);
+        }
         repository.save(Bar.singletonBar());
+        return toRemove;
     }
 
+    public BarItem updateItem(BarItem newItem){
+        if(itemRepository.findById(newItem.getId()).isPresent()){
+            return itemRepository.save(newItem);
+        } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found, try to add");
+    }
+
+    //TODO usare quando un utente fa l'ordine in Bar Order
     public boolean checkDisponibility(@NonNull BarOrder order){
         ArrayList<BarItem> notDisponibility = new ArrayList<>();
         for (BarItem item : order.getOrderDetails().keySet()) {
