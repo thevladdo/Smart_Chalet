@@ -2,6 +2,7 @@ package it.unicam.cs.ids.smartchalet.Model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import java.sql.Time;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,5 +17,5 @@ public class BarOrder {
     private UUID orderId;
     private int umbrellaId;
     private Map<BarItem,Integer> orderDetails;
-
+    private Time orderMoment;
 }

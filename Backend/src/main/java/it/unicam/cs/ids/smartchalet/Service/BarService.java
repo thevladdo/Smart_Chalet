@@ -2,7 +2,6 @@ package it.unicam.cs.ids.smartchalet.Service;
 
 import it.unicam.cs.ids.smartchalet.Model.Bar;
 import it.unicam.cs.ids.smartchalet.Model.BarItem;
-import it.unicam.cs.ids.smartchalet.Model.BarOrder;
 import it.unicam.cs.ids.smartchalet.Repository.BarItemRepository;
 import it.unicam.cs.ids.smartchalet.Repository.BarRepository;
 import lombok.NonNull;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -39,7 +37,7 @@ public class BarService {
         return items;
     }
 
-    public BarItem getItem(String name, int barId){
+    public BarItem getItem(@NonNull String name, int barId){
         ArrayList<BarItem> items = getAvailableItems(barId)
                 .stream()
                 .filter(BarItem -> BarItem.getName().toUpperCase().equals(name.toUpperCase()))
@@ -67,44 +65,20 @@ public class BarService {
         return toAdd;
     }
 
-    public BarItem removeItem(@NonNull BarItem toRemove){
-        if(!exist(toRemove)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The item is not present");
-        } else {
-            Bar.singletonBar().getItems().remove(toRemove);
-            itemRepository.delete(toRemove);
-        }
-        repository.save(Bar.singletonBar());
-        return toRemove;
+    public BarItem removeItem(@NonNull BarItem item) {
+        if(exist(item)){
+            itemRepository.delete(item);
+            if (!getBar(1).getItems().removeIf(BarItem -> BarItem.getId().equals(item.getId()))){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not present in bar collection");
+            } else repository.save(Bar.singletonBar());
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Item not present");
+        return item;
     }
 
-    public BarItem updateItem(BarItem newItem){
+    public BarItem updateItem(@NonNull BarItem newItem){
         if(itemRepository.findById(newItem.getId()).isPresent()){
             return itemRepository.save(newItem);
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found, try to add");
-    }
-
-    //TODO usare quando un utente fa l'ordine in Bar Order
-    public boolean checkDisponibility(@NonNull BarOrder order){
-        ArrayList<BarItem> notDisponibility = new ArrayList<>();
-        for (BarItem item : order.getOrderDetails().keySet()) {
-            if(!exist(item)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    item.getName().toUpperCase()+" don't exist");
-            if(item.getDisponibility() < order.getOrderDetails().get(item)) notDisponibility.add(item);
-        }
-        if (notDisponibility.isEmpty()) return true;
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, printItemList(notDisponibility));
-    }
-
-    private String printItemList(List<BarItem> items){
-        StringBuilder toReturn = new StringBuilder();
-        for (BarItem item : items) {
-            toReturn.append(item.getName());
-            toReturn.append(" Disponibility: ");
-            toReturn.append(item.getDisponibility());
-            toReturn.append("\n");
-        }
-        return toReturn.toString();
     }
 
     private boolean exist(BarItem toAdd) {
