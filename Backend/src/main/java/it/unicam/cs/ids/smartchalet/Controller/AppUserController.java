@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.*;
-import java.util.ArrayList;
 import it.unicam.cs.ids.smartchalet.Service.BarService;
 import it.unicam.cs.ids.smartchalet.Service.BeachService;
 import it.unicam.cs.ids.smartchalet.Service.AppUserService;
@@ -49,12 +48,5 @@ public class AppUserController {
     @GetMapping("/details")
     public String getDetails(String email){
         return userService.getUserDetils(email);
-    }
-
-    //TODO usare in BeachController
-    //GenericUser: Visualizza stato spiaggia
-    @GetMapping("/beachStatus")
-    public ArrayList<ArrayList<Umbrella>> getBeachStatus(){
-        return beachService.getBeachStatus(1);
     }
 }

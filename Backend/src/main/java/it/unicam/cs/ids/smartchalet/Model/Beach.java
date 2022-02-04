@@ -21,9 +21,7 @@ public class Beach {
     }
 
     public static Beach singletonBeach() {
-        if (singleBeach == null) {
-            singleBeach = new Beach();
-        }
+        if (singleBeach == null) singleBeach = new Beach();
         singleBeach.setQtyLounger();
         return singleBeach;
     }

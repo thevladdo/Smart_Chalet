@@ -4,7 +4,6 @@ import it.unicam.cs.ids.smartchalet.Model.BarOrder;
 import it.unicam.cs.ids.smartchalet.Service.BarOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 
 @RestController
