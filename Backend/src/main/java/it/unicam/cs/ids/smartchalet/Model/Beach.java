@@ -11,7 +11,7 @@ public class Beach {
     @Id
     private int id;
     private static Beach singleBeach;
-    private ArrayList<ArrayList<Umbrella>> beach;
+    private final ArrayList<Umbrella> beach;
     private int qtyLounger;
 
     private Beach() {
@@ -28,10 +28,8 @@ public class Beach {
 
     public void setQtyLounger(){
         int loungers = 0;
-        for (ArrayList<Umbrella> a: Beach.singletonBeach().beach) {
-            for (Umbrella u : a) {
-                loungers++;
-            }
+        for (Umbrella u : Beach.singletonBeach().beach) {
+            loungers = (loungers + u.getQtyLounger());
         } this.qtyLounger = loungers;
     }
 
@@ -40,7 +38,7 @@ public class Beach {
         return this.qtyLounger;
     }
 
-    public ArrayList<ArrayList<Umbrella>> getBeach(){
+    public ArrayList<Umbrella> getBeach(){
         return this.beach;
     }
 }

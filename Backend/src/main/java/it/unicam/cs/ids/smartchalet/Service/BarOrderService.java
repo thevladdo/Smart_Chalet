@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -24,6 +25,7 @@ public class BarOrderService {
     private BarItemRepository itemRepository;
 
     public BarOrder createOrder(@NonNull BarOrder order){
+        if(order.getOrderId() == null) order.setOrderId(UUID.randomUUID());
         if(!repository.existsById(order.getOrderId())){
             return repository.insert(order);
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ID already exist");
@@ -77,5 +79,4 @@ public class BarOrderService {
     private boolean exist(BarItem toAdd) {
         return itemRepository.existsById(toAdd.getId());
     }
-
 }

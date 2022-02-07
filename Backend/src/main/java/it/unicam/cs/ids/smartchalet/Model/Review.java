@@ -13,5 +13,6 @@ public class Review {
 
     @Id
     private UUID id;
+    private String userId;
     private int evaluation;
 }

@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.stream.Collectors;
-
 
 @Service
 public class BarService {
@@ -27,8 +27,8 @@ public class BarService {
         return repository.findById(id).get();
     }
 
-    public ArrayList<BarItem> getAvailableItems(int id){
-        ArrayList<BarItem> items = getBar(id)
+    public ArrayList<BarItem> getAvailableItems(int barId){
+        ArrayList<BarItem> items = getBar(barId)
                 .getItems()
                 .stream()
                 .filter(BarItem -> BarItem.getDisponibility()>0)
@@ -55,6 +55,7 @@ public class BarService {
     }
 
     public BarItem addItem(@NonNull BarItem toAdd){
+        if(toAdd.getId() == null) toAdd.setId(UUID.randomUUID());
         if(exist(toAdd)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The item is already present");
         } else {

@@ -4,6 +4,7 @@ import it.unicam.cs.ids.smartchalet.Model.ActivityReservation;
 import it.unicam.cs.ids.smartchalet.Service.ActivityReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "smartchalet/activity/reserve")
@@ -18,8 +19,8 @@ public class ActivityReservationController {
     }
 
     @GetMapping("/get")
-    public ActivityReservation getReservation(String userMail){
-        return reserveService.getReservation(userMail);
+    public ActivityReservation getReservation(@RequestParam UUID id){
+        return reserveService.getReservation(id);
     }
 
     @PutMapping("/update")

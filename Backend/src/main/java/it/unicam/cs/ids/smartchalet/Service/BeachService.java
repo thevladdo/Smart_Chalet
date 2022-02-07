@@ -26,36 +26,49 @@ public class BeachService {
         return repository.findById(id).get();
     }
 
-    public ArrayList<ArrayList<Umbrella>> getBeachStatus(int id){
+    public ArrayList<Umbrella> getBeachStatus(int id){
         if (getBeach(id).getBeach().size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No umbrella on the beach");
         return getBeach(id).getBeach();
     }
 
-    public Umbrella addUmbrella (int x, int y, @NonNull Umbrella toAdd){
+    public Umbrella addUmbrella (@NonNull Umbrella toAdd){
         if(!umbrellaRepository.existsById(toAdd.getId())){
-            Beach.singletonBeach().getBeach().get(y).add(x,toAdd);
+            for (Umbrella u: Beach.singletonBeach().getBeach()) {
+                if(toAdd.getX() == u.getX() && toAdd.getY() == u.getY())
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There already exist an umbrella in this place");
+            }
+            Beach.singletonBeach().getBeach().add(toAdd);
             repository.save(Beach.singletonBeach());
             return umbrellaRepository.insert(toAdd);
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to add existing umbrella");
     }
 
-    public boolean removeUmbrella (int y, @NonNull Umbrella toRemove){
+    public boolean removeUmbrella (@NonNull Umbrella toRemove){
         if (umbrellaRepository.existsById(toRemove.getId())){
-            Beach.singletonBeach().getBeach().get(y).removeIf(Umbrella -> Umbrella.getId().equals(toRemove.getId()));
+            Beach.singletonBeach().getBeach().removeIf(Umbrella -> Umbrella.getId().equals(toRemove.getId()));
             repository.save(Beach.singletonBeach());
             umbrellaRepository.delete(toRemove);
             return true;
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to remove not existing umbrella");
     }
 
-    public Umbrella updateUmbrella (int x, int y, @NonNull Umbrella toUpdate){
+    public Umbrella updateUmbrella (@NonNull Umbrella toUpdate){
         if(umbrellaRepository.existsById(toUpdate.getId())){
-            if(Beach.singletonBeach().getBeach().get(y).get(x).getId().equals(toUpdate.getId())){
-                Beach.singletonBeach().getBeach().get(y).set(x,toUpdate);
-                repository.save(Beach.singletonBeach());
-                return umbrellaRepository.save(toUpdate);
-            } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot update umbrella id");
+            for (Umbrella u : Beach.singletonBeach().getBeach()) {
+                if(u.getId().equals(toUpdate.getId())) {
+                    Beach.singletonBeach().getBeach().set(Beach.singletonBeach().getBeach().indexOf(u), toUpdate);
+                    repository.save(Beach.singletonBeach());
+                    return umbrellaRepository.save(toUpdate);
+                }
+            } throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot update umbrella id");
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to update not existing umbrella");
+    }
+
+    public Umbrella reserve(@NonNull Umbrella toReserve){
+        if (!umbrellaRepository.findById(toReserve.getId()).get().getDisponibility())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella is already reserved");
+        umbrellaRepository.findById(toReserve.getId()).get().setDisponibility(false);
+        return umbrellaRepository.save(toReserve);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 @Service
 public class ActivityService {
@@ -47,6 +48,18 @@ public class ActivityService {
                 updateActivity(activity);
             } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't remove. Required spots are more than available");
         }else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activity not found");
+    }
+
+    public void reinsertSpots(@NonNull String activityName, int toReAdd){
+        Activity activity = repository.findById(activityName).get();
+        if(repository.findById(activityName).isPresent()){
+            activity.setFreeSpots(activity.getFreeSpots()+toReAdd);
+            updateActivity(activity);
+        }else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activity not found");
+    }
+
+    public List<Activity> getAll() {
+        return repository.findAll();
     }
 
     private boolean existById(@NonNull String name){

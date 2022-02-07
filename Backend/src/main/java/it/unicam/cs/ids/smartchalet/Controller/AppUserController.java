@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.*;
-import it.unicam.cs.ids.smartchalet.Service.BarService;
 import it.unicam.cs.ids.smartchalet.Service.BeachService;
 import it.unicam.cs.ids.smartchalet.Service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public class AppUserController {
 
     @Autowired
-    private final AppUserService userService;
+    private AppUserService userService;
 
     @Autowired
-    private final BeachService beachService;
+    private BeachService beachService;
 
-    @Autowired//dependency injection with @component
-    public AppUserController(AppUserService userService, BeachService beachService,
-                             BarService barService) {
+    /*@Autowired//dependency injection with @component
+    public AppUserController(AppUserService userService, BeachService beachService) {
         this.userService = userService;
         this.beachService = beachService;
-    }
+    }*/
 
     @GetMapping("/get")
     public AppUser getUser(String mail){

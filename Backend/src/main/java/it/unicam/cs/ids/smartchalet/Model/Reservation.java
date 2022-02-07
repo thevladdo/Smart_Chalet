@@ -2,6 +2,7 @@ package it.unicam.cs.ids.smartchalet.Model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,8 +14,8 @@ import java.util.UUID;
 public class Reservation {
 
     @Id
-    private static UUID id;
+    private UUID id;
+    private String userId;
     private Date date;
-    private Umbrella umbrella;
-
+    private ArrayList<Umbrella> umbrellas;
 }

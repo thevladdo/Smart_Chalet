@@ -12,4 +12,5 @@ public class Qr {
 
     @Id
     private int umbrellaId;
+    private Umbrella umbrella;
 }

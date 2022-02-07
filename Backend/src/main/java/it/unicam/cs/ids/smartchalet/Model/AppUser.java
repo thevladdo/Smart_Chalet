@@ -3,7 +3,6 @@ package it.unicam.cs.ids.smartchalet.Model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
-
 @Getter
 @Setter
 @ToString
