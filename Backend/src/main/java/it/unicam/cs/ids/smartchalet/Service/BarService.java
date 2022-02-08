@@ -78,6 +78,8 @@ public class BarService {
 
     public BarItem updateItem(@NonNull BarItem newItem){
         if(itemRepository.findById(newItem.getId()).isPresent()){
+            Bar.singletonBar().getItems().set(repository.findById(1).get().getItems().indexOf(newItem),newItem);
+            repository.save(Bar.singletonBar());
             return itemRepository.save(newItem);
         } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found, try to add");
     }

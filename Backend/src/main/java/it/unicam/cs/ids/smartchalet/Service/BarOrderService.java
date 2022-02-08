@@ -47,11 +47,11 @@ public class BarOrderService {
     }
 
     public BarOrder makeOrder(@NonNull BarOrder order){
+        createOrder(order);
         if (checkDisponibility(order)) {
             for (BarItem item : order.getOrderDetails().keySet()){
                 item.setDisponibility(item.getDisponibility() - order.getOrderDetails().get(item));
-            }
-            return createOrder(order);
+            } return order;
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No disponibility. Check order details");
     }
 

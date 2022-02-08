@@ -19,8 +19,10 @@ repositories {
 }
 
 dependencies {
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
-    //implementation 'org.springframework.security:spring-security-test'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
     implementation 'org.springframework.boot:spring-boot-starter:2.6.2'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
     implementation group: 'com.kuisama.zxing', name: 'zxing-spring-boot-starter', version: '1.0.0.RELEASE'

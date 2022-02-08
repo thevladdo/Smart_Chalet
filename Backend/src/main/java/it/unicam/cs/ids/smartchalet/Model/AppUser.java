@@ -13,8 +13,7 @@ public class AppUser {
     @EqualsAndHashCode.Include
     @Id
     private String mail;
-    private String username;
     private String name;
     private String surname;
-    //private List<AuthCredential.Role> roles;
+    private AuthCredential.Role role;
 }

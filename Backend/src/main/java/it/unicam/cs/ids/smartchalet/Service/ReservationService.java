@@ -28,7 +28,7 @@ public class ReservationService {
         if (repository.existsById(reservation.getId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This reservation already exist");
         for (Umbrella u : reservation.getUmbrellas()) {
-            umbrellaRepository.findById(u.getId()).get().setDisponibility(false);
+            reserve(u);
             umbrellaRepository.save(u);
         } return repository.insert(reservation);
     }
@@ -57,5 +57,12 @@ public class ReservationService {
             } repository.delete(reservation);
             return true;
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to delete non existing reservation");
+    }
+
+    private void reserve(@NonNull Umbrella toReserve){
+        if (!umbrellaRepository.findById(toReserve.getId()).get().getDisponibility())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella is already reserved");
+        umbrellaRepository.findById(toReserve.getId()).get().setDisponibility(false);
+        umbrellaRepository.save(toReserve);
     }
 }

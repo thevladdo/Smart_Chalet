@@ -3,6 +3,7 @@ package it.unicam.cs.ids.smartchalet.Controller;
 import it.unicam.cs.ids.smartchalet.Model.Activity;
 import it.unicam.cs.ids.smartchalet.Service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,32 +15,36 @@ public class ActivityController {
     private ActivityService activityService;
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('MANAGER') and @accessCheckerComponent.sameUser(principal, #activity.getUserMail())")
     public Activity add(Activity activity){
         return activityService.addActiviy(activity);
     }
 
-    @GetMapping("/get/{name}")
+    @GetMapping("/public/get/{name}")
     public Activity get(@PathVariable String name){
         return activityService.getByName(name);
     }
 
     @DeleteMapping("/delete")
-    public boolean delete(@RequestParam String name){
+    //TODO Controllare se va bene senza @accesCheckerComponent
+    @PreAuthorize("hasAuthority('MANAGER')")
+    public boolean delete(String name){
         return activityService.deleteActivity(name);
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('MANAGER') and @accessCheckerComponent.sameUser(principal, #activity.getUserMail())")
     public Activity update( Activity activity){
         return activityService.updateActivity(activity);
     }
 
     //GenericUser: Ricerca attività
-    @GetMapping("/search/{name}")
-    public Activity searchActivity(@RequestParam @PathVariable String name){
+    @GetMapping("/public/search/{name}")
+    public Activity searchActivity(@PathVariable String name){
         return activityService.getByName(name);
     }
 
-    @GetMapping("/get/all")
+    @GetMapping("/public/get/all")
     public List<Activity> getAllActivities(){
         return activityService.getAll();
     }

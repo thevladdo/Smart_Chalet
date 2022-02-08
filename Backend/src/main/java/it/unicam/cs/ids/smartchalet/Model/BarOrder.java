@@ -15,6 +15,7 @@ public class BarOrder {
 
     @Id
     private UUID orderId;
+    private String userMail;
     private int umbrellaId;
     private Map<BarItem,Integer> orderDetails;
     private Time orderMoment;

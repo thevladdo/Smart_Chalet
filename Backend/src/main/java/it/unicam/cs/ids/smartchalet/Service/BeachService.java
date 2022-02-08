@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class BeachService {
@@ -33,6 +33,9 @@ public class BeachService {
     }
 
     public Umbrella addUmbrella (@NonNull Umbrella toAdd){
+        if(toAdd.getQtyLounger() > 2 || toAdd.getQtyLounger() < 0)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "One umbrella can have only 0, 1 or 2 Loungers");
+        if(toAdd.getId() == null) toAdd.setId(UUID.randomUUID());
         if(!umbrellaRepository.existsById(toAdd.getId())){
             for (Umbrella u: Beach.singletonBeach().getBeach()) {
                 if(toAdd.getX() == u.getX() && toAdd.getY() == u.getY())
@@ -65,10 +68,21 @@ public class BeachService {
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to update not existing umbrella");
     }
 
-    public Umbrella reserve(@NonNull Umbrella toReserve){
-        if (!umbrellaRepository.findById(toReserve.getId()).get().getDisponibility())
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella is already reserved");
-        umbrellaRepository.findById(toReserve.getId()).get().setDisponibility(false);
-        return umbrellaRepository.save(toReserve);
+    public Umbrella addOneLounger(@NonNull Umbrella umbrella){
+        if(umbrella.getQtyLounger() < 2){
+            umbrella.setQtyLounger(umbrella.getQtyLounger()+1);
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella has already 2 Loungers");
+        Beach.singletonBeach().getBeach().set(Beach.singletonBeach().getBeach().indexOf(umbrella),umbrella);
+        repository.save(Beach.singletonBeach());
+        return umbrellaRepository.save(umbrella);
+    }
+
+    public Umbrella removeOneLounger(@NonNull Umbrella umbrella){
+        if(umbrella.getQtyLounger() > 0){
+            umbrella.setQtyLounger(umbrella.getQtyLounger()-1);
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Umbrella has already 2 Loungers");
+        Beach.singletonBeach().getBeach().set(Beach.singletonBeach().getBeach().indexOf(umbrella),umbrella);
+        repository.save(Beach.singletonBeach());
+        return umbrellaRepository.save(umbrella);
     }
 }

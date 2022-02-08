@@ -41,8 +41,8 @@ public class AppUserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "AppUser not found"));
     }
 
-    public String getUserDetils(@NonNull String email){
-        return findById(email).toString();
+    public String getUserDetils(@NonNull String mail){
+        return findById(mail).toString();
     }
 
     private boolean existById(@NonNull String id){
