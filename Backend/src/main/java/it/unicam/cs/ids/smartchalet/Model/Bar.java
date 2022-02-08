@@ -3,27 +3,27 @@ package it.unicam.cs.ids.smartchalet.Model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.data.annotation.Id;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Bar {
+public class Bar implements Serializable {
 
-    private Map<ItemBar, Integer> disponibility;
+    @Id
+    private int id;
     private static Bar singleBar;
+    private ArrayList<BarItem> items;
 
     private Bar() {
-        this.disponibility = new HashMap<>();
+        this.id = 1;
+        this.items = new ArrayList<>();
     }
 
     public static Bar singletonBar(){
-        if (singleBar == null) {
-            singleBar = new Bar();
-        }
+        if (singleBar == null) singleBar = new Bar();
         return singleBar;
     }
-
 }

@@ -1,19 +1,18 @@
 package it.unicam.cs.ids.smartchalet.Model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Review {
 
-    private int valutation;
-
-    public Review(int valutation) {
-        this.valutation = valutation;
-    }
+    @Id
+    private UUID id;
+    private String userId;
+    private int evaluation;
 }
