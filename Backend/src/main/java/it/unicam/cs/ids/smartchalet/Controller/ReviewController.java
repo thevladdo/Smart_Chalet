@@ -2,6 +2,7 @@ package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.Review;
 import it.unicam.cs.ids.smartchalet.Service.ReviewService;
+import it.unicam.cs.ids.smartchalet.security.AccessCheckerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ public class ReviewController {
 
     @Autowired
     public ReviewService service;
+
+    @Autowired
+    private AccessCheckerComponent accessCheckerComponent;
 
     @PostMapping("/new")
     @PreAuthorize("hasAuthority('CLIENT') and @accessCheckerComponent.sameUser(principal, #review.getUserId())")

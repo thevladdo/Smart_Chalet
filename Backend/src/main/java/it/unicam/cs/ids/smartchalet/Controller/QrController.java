@@ -2,6 +2,7 @@ package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.Umbrella;
 import it.unicam.cs.ids.smartchalet.Service.QrService;
+import it.unicam.cs.ids.smartchalet.security.AccessCheckerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,8 +21,10 @@ public class QrController {
     @Autowired
     private QrService service;
 
+    @Autowired
+    private AccessCheckerComponent accessCheckerComponent;
+
     @GetMapping(path = "/generate", produces = MediaType.IMAGE_PNG_VALUE)
-    //TODO same as ActivityController
     @PreAuthorize("(hasAuthority('MANAGER'))")
     public BufferedImage createQr(Umbrella umbrella){
         return service.generateQRCodeImage(umbrella);

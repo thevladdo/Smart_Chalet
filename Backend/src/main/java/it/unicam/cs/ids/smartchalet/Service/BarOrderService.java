@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,43 +25,62 @@ public class BarOrderService {
     @Autowired
     private BarItemRepository itemRepository;
 
-    public BarOrder createOrder(@NonNull BarOrder order){
-        if(order.getOrderId() == null) order.setOrderId(UUID.randomUUID());
-        if(!repository.existsById(order.getOrderId())){
-            return repository.insert(order);
-        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ID already exist");
-    }
-
-    public BarOrder updateOrder(@NonNull BarOrder order, Date date){
-        if (order.getOrderMoment().before(date)){
+    public BarOrder updateOrder(@NonNull BarOrder order){
+        if (order.getDate().before(new Date(System.currentTimeMillis()))){
             if(repository.existsById(order.getOrderId())){
-                return repository.save(order);
+                removeOrder(order);
+                return makeOrder(order);
             } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order don't exist. Try to create new one");
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't modify this order. Time limit reached");
     }
 
-    public boolean removeOrder(@NonNull BarOrder order){
+    public List<BarOrder> getNewOrders(){
+        if (repository.findAll().size() != 0){
+            return repository.findAll()
+                    .parallelStream()
+                    .filter(BarOrder -> BarOrder.getDate().after(new Date(System.currentTimeMillis())))
+                    .collect(Collectors.toCollection(ArrayList::new));
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No new orders");
+    }
+
+    public BarOrder removeOrder(@NonNull BarOrder order){
          if (repository.existsById(order.getOrderId())){
-             repository.deleteById(order.getOrderId());
-             return true;
-         } else return false;
+             if(new Date(System.currentTimeMillis()).before(order.getDate())){
+                 for (UUID itemId : order.getOrderDetails().keySet()){
+                     BarItem item = itemRepository.findById(itemId).get();
+                     item.setDisponibility(item.getDisponibility() + order.getOrderDetails().get(item.getId()));
+                     itemRepository.save(item);
+                 }
+             } repository.deleteById(order.getOrderId());
+             return order;
+         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Trying to remove a not existing order");
     }
 
     public BarOrder makeOrder(@NonNull BarOrder order){
-        createOrder(order);
         if (checkDisponibility(order)) {
-            for (BarItem item : order.getOrderDetails().keySet()){
-                item.setDisponibility(item.getDisponibility() - order.getOrderDetails().get(item));
+            createOrder(order);
+            for (UUID itemId : order.getOrderDetails().keySet()){
+                BarItem item = itemRepository.findById(itemId).get();
+                item.setDisponibility(item.getDisponibility() - order.getOrderDetails().get(item.getId()));
+                itemRepository.save(item);
             } return order;
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No disponibility. Check order details");
     }
 
+    private void createOrder(@NonNull BarOrder order){
+        if(order.getOrderId() == null) order.setOrderId(UUID.randomUUID());
+        if(!repository.existsById(order.getOrderId())){
+            repository.insert(order);
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ID already exist");
+    }
+
     private boolean checkDisponibility(@NonNull BarOrder order){
         ArrayList<BarItem> notDisponibility = new ArrayList<>();
-        for (BarItem item : order.getOrderDetails().keySet()) {
+        for (UUID itemId : order.getOrderDetails().keySet()) {
+            BarItem item = itemRepository.findById(itemId).get();
             if(!exist(item)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     item.getName().toUpperCase()+" don't exist");
-            if(item.getDisponibility() < order.getOrderDetails().get(item)) notDisponibility.add(item);
+            if(item.getDisponibility() < order.getOrderDetails().get(item.getId())) notDisponibility.add(item);
         }
         if (notDisponibility.isEmpty()) return true;
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, printItemList(notDisponibility));

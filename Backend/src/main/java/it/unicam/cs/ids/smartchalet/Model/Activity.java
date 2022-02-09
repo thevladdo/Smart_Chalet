@@ -12,7 +12,6 @@ public class Activity {
 
     @Id
     private String name;
-    private String userMail;
     private String description;
     private int duration;
     private int freeSpots;

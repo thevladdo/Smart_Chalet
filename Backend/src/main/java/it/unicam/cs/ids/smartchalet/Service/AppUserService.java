@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.smartchalet.Service;
 
 import it.unicam.cs.ids.smartchalet.Model.AppUser;
-import it.unicam.cs.ids.smartchalet.Repository.UserRepository;
+import it.unicam.cs.ids.smartchalet.Repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import lombok.NonNull;
 public class AppUserService {
 
     @Autowired
-    private UserRepository repository;
+    private AppUserRepository repository;
 
     public AppUser addUser(@NonNull AppUser newAppUser){
         if(existById(newAppUser.getMail())){

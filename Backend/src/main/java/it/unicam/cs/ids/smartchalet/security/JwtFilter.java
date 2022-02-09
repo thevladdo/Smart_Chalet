@@ -24,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-            FilterChain filterChain) throws ServletException, IOException {
+                                    FilterChain filterChain) throws ServletException, IOException {
         if (httpServletRequest.getRequestURI().contains("/public/")) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
@@ -37,8 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
         } else {
             SecurityContextHolder.clearContext();
             httpServletResponse.sendError(403, "Invalid Token");
-        }
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        } filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
 }

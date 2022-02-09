@@ -45,9 +45,11 @@ public class ActivityReservationService {
 
     public ActivityReservation updateReservation(@NonNull ActivityReservation updated){
         ActivityReservation old = repository.findById(updated.getId()).get();
-        if (!updated.getDate().before(new Date()) && !old.getDate().before(new Date()))
+        if (updated.getDate().before(new Date()) && old.getDate().before(new Date()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not possible to reserve in this date");
         if (repository.findById(updated.getId()).isPresent()) {
+            if(!old.getActivityName().equals(updated.getActivityName()))
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Is not possible to change activity");
             if(old.getCapacity() > updated.getCapacity()){
                 activityService.reinsertSpots(updated.getActivityName(),(old.getCapacity()-updated.getCapacity()));
             } else activityService.removeSpot(updated.getActivityName(),(updated.getCapacity()-old.getCapacity()));
