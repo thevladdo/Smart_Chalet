@@ -10,15 +10,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: const Text("Smart Chalet"),
-            centerTitle: true,
             elevation: 0,
             backgroundColor: const Color.fromARGB(255, 217, 224, 253),
-            titleTextStyle: const TextStyle(
-                color: Color.fromARGB(255, 55, 70, 94),
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
-                wordSpacing: 2),
+            title: Row(
+              children: [
+                Image.asset(
+                  'assets/images/Beach-icon.png',
+                  width: 60,
+                  height: 60,
+                ),
+                const Text(
+                  "SMARTCHALET",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 50, 115, 103),
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -1.5,
+                      fontFamily: 'HelveticaBold',
+                      height: 2.8),
+                ),
+              ],
+            ),
           ),
           body: Center(
             child: Container(
