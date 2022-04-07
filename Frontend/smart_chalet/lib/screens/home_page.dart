@@ -6,37 +6,57 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
           title: Row(
             children: [
-              Image.asset(
-                'assets/images/Beach-icon.png',
-                width: 60,
-                height: 60,
+              Container(
+                transform: Matrix4.translationValues(0, 10, 0),
+                child: Image.asset(
+                  'assets/images/Title_2.png',
+                  height: 40,
+                  width: 40,
+                ),
               ),
-              const Text(
-                "SMARTCHALET",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 50, 115, 103),
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -1.5,
-                    fontFamily: 'HelveticaBold',
-                    height: 2.8),
+              Container(
+                transform: Matrix4.translationValues(0, 5, 0),
+                child: const Text(
+                  "Smart-Chalet",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 65, 148, 134),
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: -1,
+                      fontFamily: 'AvocadoCreamy',
+                      fontSize: 40,
+                      height: 1.5),
+                ),
+              ),
+              Container(
+                transform: Matrix4.translationValues(-10, 25, 0),
+                child: Image.asset(
+                  'assets/images/Title_1.png',
+                  height: 30,
+                  width: 30,
+                ),
               ),
             ],
           ),
         ),
         body: Center(
-          child: Column(
-            children: const [
-              HeaderImage(),
-              LogInText(),
-              FooterImage(),
-              HiText(),
-              LogInButton()
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: const [
+                HeaderImage(),
+                SittingHuman(),
+                HiText(),
+                LogInText(),
+                FooterGradient(),
+                HumanHome(),
+                LogInButton(),
+              ],
+            ),
           ),
         ));
   }
@@ -49,31 +69,31 @@ class LogInText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(30, 0, 0),
+      transform: Matrix4.translationValues(-30, -250, 0),
       child: RichText(
         text: const TextSpan(
           text: '\n\nREADY TO BOOK\nYOUR ',
           style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 30,
-              color: Color.fromARGB(255, 82, 85, 96),
-              shadows: <Shadow>[
-                Shadow(
-                    color: Color.fromARGB(255, 186, 193, 218),
-                    offset: Offset.zero,
-                    blurRadius: 20)
-              ]),
+            fontFamily: 'AvenirBook',
+            fontWeight: FontWeight.w700,
+            fontSize: 30,
+            color: Color.fromARGB(255, 82, 85, 96),
+          ),
           children: <TextSpan>[
             TextSpan(
                 text: 'UMBRELLA',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
+                style: TextStyle(
+                  fontSize: 32,
+                  fontFamily: 'AvenirBlack',
+                  fontWeight: FontWeight.w600,
+                )),
             TextSpan(
               text: '?',
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
             )
           ],
         ),
-        textAlign: TextAlign.end,
+        textAlign: TextAlign.start,
       ),
     );
   }
@@ -86,18 +106,14 @@ class HiText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        transform: Matrix4.translationValues(133, -370, 0),
+        transform: Matrix4.translationValues(-140, -190, 0),
         child: const Text('HI!',
             style: TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 50,
-                color: Color.fromARGB(255, 82, 85, 96),
-                shadows: <Shadow>[
-                  Shadow(
-                      color: Color.fromARGB(255, 186, 193, 218),
-                      offset: Offset.zero,
-                      blurRadius: 20)
-                ])));
+              fontFamily: 'AvenirBook',
+              fontWeight: FontWeight.w800,
+              fontSize: 50,
+              color: Color.fromARGB(255, 82, 85, 96),
+            )));
   }
 }
 
@@ -108,12 +124,12 @@ class LogInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(45, -200, 0),
+      transform: Matrix4.translationValues(0, -930, 0),
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 214, 225, 255),
           boxShadow: const <BoxShadow>[
             BoxShadow(
-                color: Color.fromARGB(255, 161, 167, 189),
+                color: Color.fromARGB(255, 170, 174, 196),
                 offset: Offset.zero,
                 blurRadius: 20)
           ],
@@ -153,27 +169,6 @@ class LogInButton extends StatelessWidget {
   }
 }
 
-/// This Widget represent the footer image (flipped header image)
-class FooterImage extends StatelessWidget {
-  const FooterImage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 400,
-      transform: Matrix4.rotationX(3),
-      transformAlignment: Alignment.bottomCenter,
-      child: Image.asset(
-        'assets/images/pattern-background-mobile.png',
-        fit: BoxFit.cover,
-        height: 1000,
-        alignment: Alignment.bottomCenter,
-      ),
-    );
-  }
-}
-
 /// This Widget represent the header image
 class HeaderImage extends StatelessWidget {
   const HeaderImage({Key? key}) : super(key: key);
@@ -181,12 +176,85 @@ class HeaderImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 250,
       width: 500,
-      transform: Matrix4.translationValues(0, -60, 0),
+      transform: Matrix4.translationValues(0, -100, 0),
       child: Image.asset(
-        'assets/images/pattern-background-mobile.png',
+        'assets/images/pattern-background-mobile_flipped.png',
         //fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+/// This Widget represent the footer image
+class FooterGradient extends StatelessWidget {
+  const FooterGradient({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 450,
+      width: 400,
+      transform: Matrix4.translationValues(0, -230, 0),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.elliptical(15, 15))),
+      //padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Image.asset(
+        'assets/images/Gradient_Home.png',
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+class HumanHome extends StatelessWidget {
+  const HumanHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 300,
+      width: 400,
+      transform: Matrix4.translationValues(0, -540, 0),
+      child: Image.asset(
+        'assets/images/Home.png',
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+class SittingHuman extends StatelessWidget {
+  const SittingHuman({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 70,
+      width: 60,
+      transform: Matrix4.translationValues(140, -220, 0),
+      child: Image.asset(
+        'assets/images/Humans/Humaaan_DarkGreen.png',
+        //'assets/images/Humans/Humaaan_LightGreen.png',
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+class StandingHuman extends StatelessWidget {
+  const StandingHuman({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      width: 40,
+      transform: Matrix4.translationValues(130, -0, 0),
+      child: Image.asset(
+        'assets/images/Humans/Standing.png',
+        fit: BoxFit.cover,
       ),
     );
   }
