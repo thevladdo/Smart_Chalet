@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
           title: Row(
             children: [
               Container(
-                transform: Matrix4.translationValues(0, 10, 0),
+                transform: Matrix4.translationValues(50, 10, 0),
                 child: Image.asset(
                   'assets/images/Title_2.png',
                   height: 40,
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                transform: Matrix4.translationValues(0, 5, 0),
+                transform: Matrix4.translationValues(50, 5, 0),
                 child: const Text(
                   "Smart-Chalet",
                   style: TextStyle(
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                transform: Matrix4.translationValues(-10, 25, 0),
+                transform: Matrix4.translationValues(40, 25, 0),
                 child: Image.asset(
                   'assets/images/Title_1.png',
                   height: 30,
@@ -46,13 +46,14 @@ class HomePage extends StatelessWidget {
         ),
         body: Center(
           child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
             child: Column(
               children: const [
                 HeaderImage(),
                 SittingHuman(),
                 HiText(),
                 LogInText(),
-                FooterGradient(),
+                FooterGradient(position: -230),
                 HumanHome(),
                 LogInButton(),
               ],
@@ -189,16 +190,18 @@ class HeaderImage extends StatelessWidget {
 
 /// This Widget represent the footer image
 class FooterGradient extends StatelessWidget {
-  const FooterGradient({Key? key}) : super(key: key);
+  final double position;
+
+  const FooterGradient({Key? key, required this.position}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 450,
       width: 400,
-      transform: Matrix4.translationValues(0, -230, 0),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.elliptical(15, 15))),
+      transform: Matrix4.translationValues(0, position, 0),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
       //padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: Image.asset(
         'assets/images/Gradient_Home.png',
@@ -208,6 +211,7 @@ class FooterGradient extends StatelessWidget {
   }
 }
 
+/// This Widget represent the footer overlay image
 class HumanHome extends StatelessWidget {
   const HumanHome({Key? key}) : super(key: key);
 
@@ -237,23 +241,6 @@ class SittingHuman extends StatelessWidget {
       child: Image.asset(
         'assets/images/Humans/Humaaan_DarkGreen.png',
         //'assets/images/Humans/Humaaan_LightGreen.png',
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-}
-
-class StandingHuman extends StatelessWidget {
-  const StandingHuman({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: 40,
-      transform: Matrix4.translationValues(130, -0, 0),
-      child: Image.asset(
-        'assets/images/Humans/Standing.png',
         fit: BoxFit.cover,
       ),
     );
