@@ -11,6 +11,6 @@ void main() {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MaterialApp(
-    home: RegPage(),
+    home: HomePage(),
   ));
 }

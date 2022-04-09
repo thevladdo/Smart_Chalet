@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'registration_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class HomePage extends StatelessWidget {
                 SittingHuman(),
                 HiText(),
                 LogInText(),
-                FooterGradient(position: -230),
+                FooterGradient(position: -280),
                 HumanHome(),
                 LogInButton(),
               ],
@@ -125,7 +126,7 @@ class LogInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(0, -930, 0),
+      transform: Matrix4.translationValues(0, -1010, 0),
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 214, 225, 255),
           boxShadow: const <BoxShadow>[
@@ -138,7 +139,10 @@ class LogInButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.elliptical(15, 15))),
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: TextButton(
-        onPressed: () async {},
+        onPressed: () async {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const RegPage()));
+        },
         child: RichText(
           text: const TextSpan(
             text: 'START WITH ',
@@ -197,8 +201,8 @@ class FooterGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
-      width: 400,
+      height: 550,
+      width: 450,
       transform: Matrix4.translationValues(0, position, 0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
@@ -220,7 +224,7 @@ class HumanHome extends StatelessWidget {
     return Container(
       height: 300,
       width: 400,
-      transform: Matrix4.translationValues(0, -540, 0),
+      transform: Matrix4.translationValues(0, -630, 0),
       child: Image.asset(
         'assets/images/Home.png',
         fit: BoxFit.cover,
