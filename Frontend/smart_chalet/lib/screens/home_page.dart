@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'registration_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,9 +13,12 @@ class HomePage extends StatelessWidget {
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                transform: Matrix4.translationValues(50, 10, 0),
+                width: 10.w,
+                height: 10.h,
+                transform: Matrix4.translationValues(0, 10, 0),
                 child: Image.asset(
                   'assets/images/Title_2.png',
                   height: 40,
@@ -22,20 +26,22 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                transform: Matrix4.translationValues(50, 5, 0),
-                child: const Text(
+                transform: Matrix4.translationValues(0, 5, 0),
+                child: Text(
                   "Smart-Chalet",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 65, 148, 134),
+                      color: const Color.fromARGB(255, 65, 148, 134),
                       fontWeight: FontWeight.w500,
                       letterSpacing: -1,
                       fontFamily: 'AvocadoCreamy',
-                      fontSize: 40,
+                      fontSize: 30.sp,
                       height: 1.5),
                 ),
               ),
               Container(
-                transform: Matrix4.translationValues(40, 25, 0),
+                width: 8.w,
+                height: 8.h,
+                transform: Matrix4.translationValues(-10, 25, 0),
                 child: Image.asset(
                   'assets/images/Title_1.png',
                   height: 30,
@@ -56,7 +62,7 @@ class HomePage extends StatelessWidget {
                 LogInText(),
                 FooterGradient(position: -280),
                 HumanHome(),
-                LogInButton(),
+                StartLogInButton(),
               ],
             ),
           ),
@@ -73,25 +79,25 @@ class LogInText extends StatelessWidget {
     return Container(
       transform: Matrix4.translationValues(-30, -250, 0),
       child: RichText(
-        text: const TextSpan(
+        text: TextSpan(
           text: '\n\nREADY TO BOOK\nYOUR ',
           style: TextStyle(
             fontFamily: 'AvenirBook',
             fontWeight: FontWeight.w700,
-            fontSize: 30,
-            color: Color.fromARGB(255, 82, 85, 96),
+            fontSize: 24.sp,
+            color: const Color.fromARGB(255, 82, 85, 96),
           ),
           children: <TextSpan>[
             TextSpan(
                 text: 'UMBRELLA',
                 style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 24.sp,
                   fontFamily: 'AvenirBlack',
                   fontWeight: FontWeight.w600,
                 )),
             TextSpan(
               text: '?',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24.sp),
             )
           ],
         ),
@@ -109,19 +115,19 @@ class HiText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         transform: Matrix4.translationValues(-140, -190, 0),
-        child: const Text('HI!',
+        child: Text('HI!',
             style: TextStyle(
-              fontFamily: 'AvenirBook',
+              fontFamily: 'AllRound',
               fontWeight: FontWeight.w800,
-              fontSize: 50,
-              color: Color.fromARGB(255, 82, 85, 96),
+              fontSize: 39.sp,
+              color: const Color.fromARGB(255, 82, 85, 96),
             )));
   }
 }
 
 /// This Widget represent the LogIn Button
-class LogInButton extends StatelessWidget {
-  const LogInButton({Key? key}) : super(key: key);
+class StartLogInButton extends StatelessWidget {
+  const StartLogInButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +188,7 @@ class HeaderImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      width: 500,
+      width: 100.w,
       transform: Matrix4.translationValues(0, -100, 0),
       child: Image.asset(
         'assets/images/pattern-background-mobile_flipped.png',
@@ -202,7 +208,7 @@ class FooterGradient extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 550,
-      width: 450,
+      width: 100.w,
       transform: Matrix4.translationValues(0, position, 0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
@@ -223,8 +229,8 @@ class HumanHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      width: 400,
-      transform: Matrix4.translationValues(0, -630, 0),
+      width: 100.h,
+      transform: Matrix4.translationValues(0, -640, 0),
       child: Image.asset(
         'assets/images/Home.png',
         fit: BoxFit.cover,
@@ -233,14 +239,15 @@ class HumanHome extends StatelessWidget {
   }
 }
 
+/// This Widget represent the sitting human image
 class SittingHuman extends StatelessWidget {
   const SittingHuman({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      width: 60,
+      height: 9.h,
+      width: 14.w,
       transform: Matrix4.translationValues(140, -220, 0),
       child: Image.asset(
         'assets/images/Humans/Humaaan_DarkGreen.png',

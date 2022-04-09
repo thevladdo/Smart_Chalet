@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-// ignore: unused_import
+import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/screens/home_page.dart';
-// ignore: unused_import
-import 'package:smart_chalet/screens/registration_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(const MaterialApp(
-    home: HomePage(),
-  ));
+  runApp(Sizer(builder: (context, orientation, deviceType) {
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false, home: HomePage());
+  }));
 }
