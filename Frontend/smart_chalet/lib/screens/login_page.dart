@@ -1,108 +1,183 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'home_page.dart';
+import 'package:smart_chalet/Widget/icons.dart';
+import 'package:smart_chalet/Widget/title_row.dart';
+import '../Widget/images.dart';
 import 'registration_page.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<LoginPage> createState() => _LoginState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Container(
-              transform: Matrix4.translationValues(1, 10, 0),
-              child: const Icon(Icons.arrow_back_ios_new_rounded)),
+        appBar: AppBar(
+          leading: const IconBackButton(),
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(255, 214, 225, 255),
+          title: const TitleRow(),
         ),
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 214, 225, 255),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: 10.w,
-              height: 10.h,
-              transform: Matrix4.translationValues(-10, 10, 0),
-              child: Image.asset(
-                'assets/images/Title_2.png',
-                height: 40,
-                width: 40,
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Stack(
+                // REGISTRATION
+                children: [
+                  SizedBox(
+                    width: 100.w,
+                    height: 125,
+                  ),
+                  const Positioned(
+                    top: -80,
+                    child: HeaderImageRound(),
+                  ),
+                  const Positioned(
+                    top: 40,
+                    left: 20,
+                    child: Lights(),
+                  ),
+                  Positioned(
+                    top: 95,
+                    left: 20.w,
+                    right: 20.w,
+                    child: const LoginText(),
+                  ),
+                ],
+              ),
+              Stack(
+                // FORM
+                children: [
+                  SizedBox(
+                    width: 100.w,
+                    height: 650,
+                  ),
+                  Positioned(
+                    top: 200,
+                    width: 100.w,
+                    child: const GradientFooter(),
+                  ),
+                  const Positioned(
+                    top: 280,
+                    left: -20,
+                    child: NoLightsHome(),
+                  ),
+                  Positioned(
+                    top: 0,
+                    width: 100.w,
+                    height: 700,
+                    child: const LoginForm(),
+                  ),
+                  const Positioned(
+                    top: 355,
+                    left: 150,
+                    right: 150,
+                    child: RegButton(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
+
+  @override
+  LoginFormState createState() {
+    return LoginFormState();
+  }
+}
+
+class LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          const Positioned(
+            top: 90,
+            child: EmailField(),
+          ),
+          const Positioned(
+            top: 160,
+            child: PasswordField(),
+          ),
+          Positioned(
+            top: 295,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 169, 232, 221),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                        color: Color.fromARGB(255, 200, 205, 230),
+                        offset: Offset.zero,
+                        blurRadius: 20)
+                  ],
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 169, 232, 221)),
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(15, 15))),
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: ButtonStyle(
+                    overlayColor: MaterialStateColor.resolveWith(
+                        (states) => const Color.fromARGB(255, 169, 232, 221))),
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    print('object');
+                  }
+                },
+                child: RichText(
+                  text: const TextSpan(
+                    text: 'Login',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 82, 85, 96),
+                      letterSpacing: -1,
+                    ),
+                  ),
+                ),
               ),
             ),
-            Container(
-              transform: Matrix4.translationValues(-10, 5, 0),
-              child: Text(
-                "Smart-Chalet",
-                style: TextStyle(
-                    color: const Color.fromARGB(255, 65, 148, 134),
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -1,
-                    fontFamily: 'AvocadoCreamy',
-                    fontSize: 30.sp,
-                    height: 1.5),
-              ),
-            ),
-            Container(
-              height: 8.h,
-              width: 8.w,
-              transform: Matrix4.translationValues(-20, 25, 0),
-              child: Image.asset(
-                'assets/images/Title_1.png',
-                height: 30,
-                width: 30,
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Column(
-          children: const [
-            HeaderImageRound(),
-            Lights(),
-            //Clock(),
-            LogText(),
-            FooterGradient(position: -20),
-            EmailField(position: -660),
-            PasswordField(position: -640),
-            HumanHomeModern(position: -640),
-            //StandingHuman(),
-            LogButton(position: -970),
-            RegButton(position: -973)
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
 }
 
-class LogText extends StatelessWidget {
-  const LogText({Key? key}) : super(key: key);
+class LoginText extends StatelessWidget {
+  const LoginText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(0, -170, 0),
+      //transform: Matrix4.translationValues(0, -180, 0),
       transformAlignment: Alignment.center,
-      child: Text(
+      child: const Text(
         'LOGIN',
+        textAlign: TextAlign.center,
         style: TextStyle(
             fontWeight: FontWeight.w800,
-            fontSize: 17.sp,
+            fontSize: 22,
             letterSpacing: -1,
-            color: const Color.fromARGB(255, 82, 85, 96),
-            shadows: const <Shadow>[
+            color: Color.fromARGB(255, 82, 85, 96),
+            shadows: <Shadow>[
               Shadow(
                   color: Color.fromARGB(255, 186, 193, 218),
                   offset: Offset.zero,
@@ -113,59 +188,21 @@ class LogText extends StatelessWidget {
   }
 }
 
-class LogButton extends StatelessWidget {
-  final double position;
-
-  const LogButton({Key? key, required this.position}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      transform: Matrix4.translationValues(0, position, 0),
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 169, 232, 221),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-                color: Color.fromARGB(255, 200, 205, 230),
-                offset: Offset.zero,
-                blurRadius: 20)
-          ],
-          border: Border.all(color: const Color.fromARGB(255, 169, 232, 221)),
-          borderRadius: const BorderRadius.all(Radius.elliptical(15, 15))),
-      padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-      child: TextButton(
-        onPressed: () async {}, //TODO ON PRESSED
-        child: RichText(
-          text: const TextSpan(
-            text: 'Login',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-              color: Color.fromARGB(255, 82, 85, 96),
-              letterSpacing: -1,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class RegButton extends StatelessWidget {
-  final double position;
-
-  const RegButton({Key? key, required this.position}) : super(key: key);
+  const RegButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(0, position, 0),
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: TextButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateColor.resolveWith(
+                (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
-          Navigator.pop(context,
+          Navigator.push(context,
               MaterialPageRoute(builder: (context) => const RegPage()));
-        }, //TODO ON PRESSED
+        },
         child: RichText(
           text: const TextSpan(
             text: 'Register',

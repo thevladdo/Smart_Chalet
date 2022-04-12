@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import '../Widget/images.dart';
+import '../Widget/title_row.dart';
 import 'registration_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,64 +10,82 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          title: const TitleStack(),
+        ),
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                width: 10.w,
-                height: 10.h,
-                transform: Matrix4.translationValues(0, 10, 0),
-                child: Image.asset(
-                  'assets/images/Title_2.png',
-                  height: 40,
-                  width: 40,
-                ),
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 100.w,
+                    height: 150,
+                  ),
+                  const Positioned(
+                    top: -80,
+                    child: HomeWave(),
+                  ),
+                  const Positioned(
+                    right: 30,
+                    bottom: 40,
+                    child: SittingHuman(),
+                  )
+                ],
               ),
-              Container(
-                transform: Matrix4.translationValues(0, 5, 0),
-                child: Text(
-                  "Smart-Chalet",
-                  style: TextStyle(
-                      color: const Color.fromARGB(255, 65, 148, 134),
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: -1,
-                      fontFamily: 'AvocadoCreamy',
-                      fontSize: 30.sp,
-                      height: 1.5),
-                ),
-              ),
-              Container(
-                width: 8.w,
-                height: 8.h,
-                transform: Matrix4.translationValues(-10, 25, 0),
-                child: Image.asset(
-                  'assets/images/Title_1.png',
-                  height: 30,
-                  width: 30,
-                ),
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 100.w,
+                    height: 650,
+                  ),
+                  Positioned(
+                    top: 200,
+                    width: 100.w,
+                    child: const GradientFooter(),
+                  ),
+                  const Positioned(
+                    top: 280,
+                    child: HomePlants(),
+                  ),
+                  const Positioned(
+                    left: 30,
+                    child: HiText(),
+                  ),
+                  const Positioned(
+                    left: 30,
+                    child: LogInText(),
+                  ),
+                  const Positioned(
+                    bottom: 350,
+                    left: 75,
+                    right: 75,
+                    child: StartLogInButton(),
+                  )
+                ],
               ),
             ],
           ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Column(
-              children: const [
-                HeaderImage(),
-                SittingHuman(),
-                HiText(),
-                LogInText(),
-                FooterGradient(position: -280),
-                HumanHome(),
-                StartLogInButton(),
-              ],
-            ),
-          ),
+        ));
+  }
+}
+
+/// This Widget contains "Hi" text
+class HiText extends StatelessWidget {
+  const HiText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('HI!',
+        style: TextStyle(
+          fontFamily: 'AllRound',
+          fontWeight: FontWeight.w800,
+          fontSize: 39.sp,
+          color: const Color.fromARGB(255, 82, 85, 96),
         ));
   }
 }
@@ -76,52 +96,31 @@ class LogInText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      transform: Matrix4.translationValues(-30, -250, 0),
-      child: RichText(
-        text: TextSpan(
-          text: '\n\nREADY TO BOOK\nYOUR ',
-          style: TextStyle(
-            fontFamily: 'AvenirBook',
-            fontWeight: FontWeight.w700,
-            fontSize: 24.sp,
-            color: const Color.fromARGB(255, 82, 85, 96),
-          ),
-          children: <TextSpan>[
-            TextSpan(
-                text: 'UMBRELLA',
-                style: TextStyle(
-                  fontSize: 24.sp,
-                  fontFamily: 'AvenirBlack',
-                  fontWeight: FontWeight.w600,
-                )),
-            TextSpan(
-              text: '?',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24.sp),
-            )
-          ],
+    return RichText(
+      text: TextSpan(
+        text: '\n\nREADY TO BOOK\nYOUR ',
+        style: TextStyle(
+          fontFamily: 'AvenirBook',
+          fontWeight: FontWeight.w700,
+          fontSize: 24.sp,
+          color: const Color.fromARGB(255, 82, 85, 96),
         ),
-        textAlign: TextAlign.start,
+        children: <TextSpan>[
+          TextSpan(
+              text: 'UMBRELLA',
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontFamily: 'AvenirBlack',
+                fontWeight: FontWeight.w600,
+              )),
+          TextSpan(
+            text: '?',
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24.sp),
+          )
+        ],
       ),
+      textAlign: TextAlign.start,
     );
-  }
-}
-
-/// This Widget contains "Hi" text
-class HiText extends StatelessWidget {
-  const HiText({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        transform: Matrix4.translationValues(-140, -190, 0),
-        child: Text('HI!',
-            style: TextStyle(
-              fontFamily: 'AllRound',
-              fontWeight: FontWeight.w800,
-              fontSize: 39.sp,
-              color: const Color.fromARGB(255, 82, 85, 96),
-            )));
   }
 }
 
@@ -132,7 +131,6 @@ class StartLogInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      transform: Matrix4.translationValues(0, -1010, 0),
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 214, 225, 255),
           boxShadow: const <BoxShadow>[
@@ -145,6 +143,9 @@ class StartLogInButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.elliptical(15, 15))),
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: TextButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateColor.resolveWith(
+                (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const RegPage()));
@@ -175,84 +176,6 @@ class StartLogInButton extends StatelessWidget {
           ),
           textAlign: TextAlign.end,
         ),
-      ),
-    );
-  }
-}
-
-/// This Widget represent the header image
-class HeaderImage extends StatelessWidget {
-  const HeaderImage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      width: 100.w,
-      transform: Matrix4.translationValues(0, -100, 0),
-      child: Image.asset(
-        'assets/images/pattern-background-mobile_flipped.png',
-        //fit: BoxFit.cover,
-      ),
-    );
-  }
-}
-
-/// This Widget represent the footer image
-class FooterGradient extends StatelessWidget {
-  final double position;
-
-  const FooterGradient({Key? key, required this.position}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 550,
-      width: 100.w,
-      transform: Matrix4.translationValues(0, position, 0),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
-      //padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      child: Image.asset(
-        'assets/images/Gradient_Home.png',
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-}
-
-/// This Widget represent the footer overlay image
-class HumanHome extends StatelessWidget {
-  const HumanHome({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 300,
-      width: 100.h,
-      transform: Matrix4.translationValues(0, -640, 0),
-      child: Image.asset(
-        'assets/images/Home.png',
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-}
-
-/// This Widget represent the sitting human image
-class SittingHuman extends StatelessWidget {
-  const SittingHuman({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 9.h,
-      width: 14.w,
-      transform: Matrix4.translationValues(140, -220, 0),
-      child: Image.asset(
-        'assets/images/Humans/Humaaan_DarkGreen.png',
-        //'assets/images/Humans/Humaaan_LightGreen.png',
-        fit: BoxFit.cover,
       ),
     );
   }

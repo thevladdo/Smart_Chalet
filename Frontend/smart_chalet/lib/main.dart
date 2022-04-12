@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/screens/home_page.dart';
+import 'Screens/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,6 +9,8 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(Sizer(builder: (context, orientation, deviceType) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: HomePage());
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }));
 }
