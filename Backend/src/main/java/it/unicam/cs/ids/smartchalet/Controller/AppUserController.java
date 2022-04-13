@@ -3,7 +3,7 @@ package it.unicam.cs.ids.smartchalet.Controller;
 import it.unicam.cs.ids.smartchalet.Model.*;
 import it.unicam.cs.ids.smartchalet.Service.AppUserService;
 import it.unicam.cs.ids.smartchalet.Service.AuthCredentialService;
-import it.unicam.cs.ids.smartchalet.security.AccessCheckerComponent;
+import it.unicam.cs.ids.smartchalet.Security.AccessCheckerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;

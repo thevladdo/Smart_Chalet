@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  animated_text_kit: ^4.2.1
   cupertino_icons: ^1.0.2
   sizer: ^2.0.15
   animated_button: ^0.2.0
@@ -49,7 +48,9 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icons/icon.png"
+  image_path: "assets/icons/icon_2.png"
+  # flutter pub get
+  # flutter pub run flutter_launcher_icons:main
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

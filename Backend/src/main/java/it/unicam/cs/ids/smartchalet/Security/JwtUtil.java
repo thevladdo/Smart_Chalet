@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.smartchalet.security;
+package it.unicam.cs.ids.smartchalet.Security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -100,6 +100,9 @@ class LoginForm extends StatefulWidget {
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -108,13 +111,17 @@ class LoginFormState extends State<LoginForm> {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          const Positioned(
+          Positioned(
             top: 90,
-            child: EmailField(),
+            child: EmailField(
+              controller: _emailController,
+            ),
           ),
-          const Positioned(
+          Positioned(
             top: 160,
-            child: PasswordField(),
+            child: PasswordField(
+              controller: _passwordController,
+            ),
           ),
           Positioned(
             top: 295,
@@ -138,7 +145,31 @@ class LoginFormState extends State<LoginForm> {
                         (states) => const Color.fromARGB(255, 169, 232, 221))),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print('object');
+                    final user = {
+                      'email': _emailController.text,
+                      'password': _passwordController.text,
+                    };
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor:
+                            const Color.fromARGB(255, 86, 163, 174),
+                        elevation: 30,
+                        action: SnackBarAction(
+                            label: 'Thanks',
+                            textColor: const Color.fromARGB(255, 169, 232, 221),
+                            onPressed: () {
+                              DismissAction;
+                            }),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        content: Text(
+                          user.toString(),
+                        ),
+                      ),
+                    );
                   }
                 },
                 child: RichText(

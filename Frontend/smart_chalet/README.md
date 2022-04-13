@@ -1,6 +1,6 @@
 # smart_chalet
 
-A new Flutter project.
+A new Flutter Project for Programming of Web and Mobile Applications exam - University of Camerino.
 
 ## Getting Started
 

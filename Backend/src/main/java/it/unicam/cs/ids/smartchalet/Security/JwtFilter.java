@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.smartchalet.security;
+package it.unicam.cs.ids.smartchalet.Security;
 
 import it.unicam.cs.ids.smartchalet.Service.AuthCredentialService;
 import org.springframework.beans.factory.annotation.Autowired;

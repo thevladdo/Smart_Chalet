@@ -2,7 +2,7 @@ package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.Review;
 import it.unicam.cs.ids.smartchalet.Service.ReviewService;
-import it.unicam.cs.ids.smartchalet.security.AccessCheckerComponent;
+import it.unicam.cs.ids.smartchalet.Security.AccessCheckerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

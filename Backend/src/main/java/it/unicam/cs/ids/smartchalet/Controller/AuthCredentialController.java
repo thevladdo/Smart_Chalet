@@ -2,8 +2,8 @@ package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.AuthCredential;
 import it.unicam.cs.ids.smartchalet.Service.AuthCredentialService;
-import it.unicam.cs.ids.smartchalet.security.AccessCheckerComponent;
-import it.unicam.cs.ids.smartchalet.security.JwtUtil;
+import it.unicam.cs.ids.smartchalet.Security.AccessCheckerComponent;
+import it.unicam.cs.ids.smartchalet.Security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,7 +31,7 @@ public class AuthCredentialController {
         } else return null;
     }
 
-    @PostMapping("/public/addCredential")
+    @PostMapping("/ public/addCredential")
     @PreAuthorize("permitAll")
     public String addCredential(@RequestBody @Param("credential") AuthCredential credentials) {
         authCredentialService.addCredentials(credentials);

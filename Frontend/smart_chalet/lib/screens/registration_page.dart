@@ -101,6 +101,11 @@ class RegForm extends StatefulWidget {
 class RegFormState extends State<RegForm> {
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _surnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -109,21 +114,29 @@ class RegFormState extends State<RegForm> {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          const Positioned(
+          Positioned(
             left: 30,
-            child: NameField(),
+            child: NameField(
+              controller: _nameController,
+            ),
           ),
-          const Positioned(
+          Positioned(
             right: 30,
-            child: SurnameField(),
+            child: SurnameField(
+              controller: _surnameController,
+            ),
           ),
-          const Positioned(
+          Positioned(
             top: 70,
-            child: EmailField(),
+            child: EmailField(
+              controller: _emailController,
+            ),
           ),
-          const Positioned(
+          Positioned(
             top: 140,
-            child: PasswordField(),
+            child: PasswordField(
+              controller: _passwordController,
+            ),
           ),
           Positioned(
             top: 245,
@@ -147,7 +160,33 @@ class RegFormState extends State<RegForm> {
                         (states) => const Color.fromARGB(255, 169, 232, 221))),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print('object');
+                    final user = {
+                      'name': _nameController.text,
+                      'surname': _surnameController.text,
+                      'email': _emailController.text,
+                      'password': _passwordController.text,
+                    };
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor:
+                            const Color.fromARGB(255, 86, 163, 174),
+                        elevation: 30,
+                        action: SnackBarAction(
+                            label: 'Thanks',
+                            textColor: const Color.fromARGB(255, 169, 232, 221),
+                            onPressed: () {
+                              DismissAction;
+                            }),
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        content: Text(
+                          user.toString(),
+                        ),
+                      ),
+                    );
                   }
                 },
                 child: RichText(
@@ -171,14 +210,15 @@ class RegFormState extends State<RegForm> {
 }
 
 class NameField extends StatelessWidget {
-  const NameField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const NameField({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 150,
       height: 50,
-      padding: const EdgeInsets.fromLTRB(15, 20, 15, 7.5),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
           boxShadow: <BoxShadow>[
@@ -189,7 +229,6 @@ class NameField extends StatelessWidget {
           ],
           borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
       child: TextFormField(
-        maxLines: 1,
         validator: (value) {
           if (value!.isEmpty || !RegExp(r'^[a-zA-z]+$').hasMatch(value)) {
             return 'Enter your Name';
@@ -198,6 +237,7 @@ class NameField extends StatelessWidget {
           }
         },
         cursorColor: const Color.fromARGB(255, 124, 208, 193),
+        controller: controller,
         onFieldSubmitted: (value) {},
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.name,
@@ -213,14 +253,15 @@ class NameField extends StatelessWidget {
 }
 
 class SurnameField extends StatelessWidget {
-  const SurnameField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const SurnameField({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 150,
       height: 50,
-      padding: const EdgeInsets.fromLTRB(15, 20, 15, 7.5),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
           boxShadow: <BoxShadow>[
@@ -234,13 +275,15 @@ class SurnameField extends StatelessWidget {
         maxLines: 1,
         validator: (value) {
           if (value!.isEmpty || !RegExp(r'^[a-zA-z]+$').hasMatch(value)) {
-            return 'Please enter your Surname';
+            return 'Enter your Surname';
           } else {
             return null;
           }
         },
+        controller: controller,
         cursorColor: const Color.fromARGB(255, 124, 208, 193),
         decoration: const InputDecoration(
+            errorStyle: TextStyle(color: Color.fromARGB(255, 255, 109, 99)),
             border: InputBorder.none,
             hintText: 'SURNAME',
             hintStyle: TextStyle(fontSize: 15)),
@@ -252,14 +295,15 @@ class SurnameField extends StatelessWidget {
 }
 
 class EmailField extends StatelessWidget {
-  const EmailField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const EmailField({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 330,
       height: 50,
-      padding: const EdgeInsets.fromLTRB(15, 20, 15, 7.5),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
           boxShadow: <BoxShadow>[
@@ -271,9 +315,11 @@ class EmailField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
       child: TextFormField(
         maxLines: 1,
+        controller: controller,
         validator: (value) => validateEmail(value),
         cursorColor: const Color.fromARGB(255, 124, 208, 193),
         decoration: const InputDecoration(
+            errorStyle: TextStyle(color: Color.fromARGB(255, 255, 109, 99)),
             border: InputBorder.none,
             hintText: 'EMAIL',
             hintStyle: TextStyle(fontSize: 15)),
@@ -285,14 +331,15 @@ class EmailField extends StatelessWidget {
 }
 
 class PasswordField extends StatelessWidget {
-  const PasswordField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const PasswordField({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 330,
       height: 50,
-      padding: const EdgeInsets.fromLTRB(15, 20, 15, 7.5),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
           boxShadow: <BoxShadow>[
@@ -303,9 +350,11 @@ class PasswordField extends StatelessWidget {
           ],
           borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
       child: TextFormField(
+          controller: controller,
           validator: (value) => validatePsw(value),
           cursorColor: const Color.fromARGB(255, 124, 208, 193),
           decoration: const InputDecoration(
+              errorStyle: TextStyle(color: Color.fromARGB(255, 255, 109, 99)),
               border: InputBorder.none,
               hintText: 'PASSWORD',
               hintStyle: TextStyle(fontSize: 15)),

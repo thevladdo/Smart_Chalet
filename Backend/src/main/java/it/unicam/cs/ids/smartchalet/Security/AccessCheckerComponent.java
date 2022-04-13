@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.smartchalet.security;
+package it.unicam.cs.ids.smartchalet.Security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
