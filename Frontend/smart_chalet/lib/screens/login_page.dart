@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Widget/icons.dart';
+import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../Widget/images.dart';
 import 'registration_page.dart';

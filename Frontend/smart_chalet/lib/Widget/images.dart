@@ -92,7 +92,6 @@ class SittingHuman extends StatelessWidget {
   }
 }
 
-///TODO DELETE
 class GradientFooter extends StatelessWidget {
   const GradientFooter({Key? key}) : super(key: key);
 
@@ -170,6 +169,124 @@ class HomePlants extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/Home.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Boat extends StatelessWidget {
+  final double opacity;
+  const Boat({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/boat.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Luggage extends StatelessWidget {
+  final double opacity;
+  const Luggage({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/luggage.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Oxygen extends StatelessWidget {
+  final double opacity;
+  const Oxygen({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/oxygen.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Savage extends StatelessWidget {
+  final double opacity;
+  const Savage({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/savage.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Sunglass extends StatelessWidget {
+  final double opacity;
+  const Sunglass({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/sunglass.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class Tshirt extends StatelessWidget {
+  final double opacity;
+  const Tshirt({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/t-shirt.png'),
           fit: BoxFit.cover,
         ),
       ),
