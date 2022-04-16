@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../Widget/images.dart';
+import 'NavigationBarRoutes/main_page.dart';
 import 'registration_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -153,7 +154,7 @@ class LoginFormState extends State<LoginForm> {
                       SnackBar(
                         backgroundColor:
                             const Color.fromARGB(255, 86, 163, 174),
-                        elevation: 30,
+                        elevation: 0,
                         action: SnackBarAction(
                             label: 'Thanks',
                             textColor: const Color.fromARGB(255, 169, 232, 221),
@@ -168,6 +169,12 @@ class LoginFormState extends State<LoginForm> {
                         content: Text(
                           user.toString(),
                         ),
+                      ),
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainPage(),
                       ),
                     );
                   }

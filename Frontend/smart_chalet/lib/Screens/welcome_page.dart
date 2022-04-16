@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Screens/NavigationBarRoutes/main_page.dart';
 import '../Widget/images.dart';
 import '../Widget/title_row.dart';
 import 'registration_page.dart';
@@ -12,6 +11,7 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
           title: const TitleStack(),

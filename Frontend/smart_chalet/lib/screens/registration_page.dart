@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_chalet/Screens/NavigationBarRoutes/main_page.dart';
 import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../Utilities/validator.dart';
@@ -166,17 +167,19 @@ class RegFormState extends State<RegForm> {
                       'email': _emailController.text,
                       'password': _passwordController.text,
                     };
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor:
                             const Color.fromARGB(255, 86, 163, 174),
-                        elevation: 30,
+                        elevation: 0,
                         action: SnackBarAction(
-                            label: 'Thanks',
-                            textColor: const Color.fromARGB(255, 169, 232, 221),
-                            onPressed: () {
-                              DismissAction;
-                            }),
+                          label: 'Thanks',
+                          textColor: const Color.fromARGB(255, 169, 232, 221),
+                          onPressed: () {
+                            DismissAction;
+                          },
+                        ),
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
@@ -185,6 +188,12 @@ class RegFormState extends State<RegForm> {
                         content: Text(
                           user.toString(),
                         ),
+                      ),
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainPage(),
                       ),
                     );
                   }
@@ -405,8 +414,12 @@ class LogInButton extends StatelessWidget {
             overlayColor: MaterialStateColor.resolveWith(
                 (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoginPage()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          );
         },
         child: RichText(
           text: const TextSpan(
