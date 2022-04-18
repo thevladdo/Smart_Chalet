@@ -16,7 +16,7 @@ public class BeachService {
     @Autowired
     private UmbrellaRepository umbrellaRepository;
 
-    public List<Umbrella> getBeachStatus(int id){
+    public List<Umbrella> getBeachStatus(){
         if (umbrellaRepository.findAll().size() == 0)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No umbrella on the beach");
         return umbrellaRepository.findAll();

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Screens/welcome_page.dart';
+import 'package:smart_chalet/Screens/Non_Authenticated/welcome_page.dart';
 
 class IconBackButton extends StatelessWidget {
   const IconBackButton({Key? key}) : super(key: key);
@@ -107,6 +107,7 @@ class ArrowsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Flexible shoud be wrapped around whit row or columns
     return Flexible(
       child: Container(
         width: isResponsive == true ? 100.w : width,

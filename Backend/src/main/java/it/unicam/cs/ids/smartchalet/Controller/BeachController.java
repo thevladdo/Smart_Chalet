@@ -22,7 +22,7 @@ public class BeachController {
     @GetMapping("/public/status")
     @PreAuthorize("permitAll()")
     public List<Umbrella> getStatus(){
-        return service.getBeachStatus(1);
+        return service.getBeachStatus();
     }
 
     @PostMapping("/add/umbrella")

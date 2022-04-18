@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../home_page.dart';
+import '../Authenticated/home_page.dart';
 import 'account_page.dart';
 import 'bar_page.dart';
 

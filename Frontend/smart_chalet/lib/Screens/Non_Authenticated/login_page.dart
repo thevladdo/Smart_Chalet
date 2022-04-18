@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
-import '../Widget/images.dart';
-import 'NavigationBarRoutes/main_page.dart';
+import '../../Widget/images.dart';
+import '../NavigationBarRoutes/navigator_page.dart';
 import 'registration_page.dart';
 
 class LoginPage extends StatefulWidget {

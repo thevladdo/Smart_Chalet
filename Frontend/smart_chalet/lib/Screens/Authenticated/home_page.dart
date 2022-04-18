@@ -1,8 +1,8 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Screens/detail_page.dart';
-import '../Widget/images.dart';
+import 'package:smart_chalet/Screens/Authenticated/detail_page.dart';
+import '../../Widget/images.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -278,6 +278,23 @@ class _HomePageState extends State<HomePage> {
                 bottom: 46,
                 left: 95,
                 right: 95,
+                child: Container(
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        offset: Offset(0, 10),
+                        blurRadius: 30,
+                        color: Color.fromARGB(255, 194, 206, 234),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 46,
+                left: 95,
+                right: 95,
                 child: AnimatedButton(
                   color: const Color.fromARGB(255, 210, 221, 253),
                   onPressed: () {},
@@ -296,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           )
         ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import '../Widget/images.dart';
-import '../Widget/title_row.dart';
+import 'package:smart_chalet/Cubit/app_cubits.dart';
+import '../../Widget/images.dart';
+import '../../Widget/title_row.dart';
 import 'registration_page.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -148,6 +150,7 @@ class StartLogInButton extends StatelessWidget {
             overlayColor: MaterialStateColor.resolveWith(
                 (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
+          BlocProvider.of<AppCubits>(context).getUmbrella();
           Navigator.push(
               context,
               MaterialPageRoute(

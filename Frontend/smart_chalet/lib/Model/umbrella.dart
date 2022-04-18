@@ -5,21 +5,22 @@ class Umbrella {
   int qtyLounger;
   bool disponibility;
 
-  Umbrella(
-    this.id,
-    this.y,
-    this.x,
-    this.qtyLounger,
-    this.disponibility,
-  );
+  Umbrella({
+    required this.id,
+    required this.y,
+    required this.x,
+    required this.qtyLounger,
+    required this.disponibility,
+  });
 
-  Umbrella.complete(
-    this.id,
-    this.y,
-    this.x,
-    this.qtyLounger,
-    this.disponibility,
-  );
+  factory Umbrella.fromJson(Map<String, dynamic> json) {
+    return Umbrella(
+        id: json["id"],
+        y: json["y"],
+        x: json["x"],
+        qtyLounger: json["qtyLounger"],
+        disponibility: json["disponibility"]);
+  }
 
   String get getId => id;
 
@@ -40,4 +41,11 @@ class Umbrella {
   get getDisponibility => disponibility;
 
   set setDisponibility(disponibility) => this.disponibility = disponibility;
+
+  @override
+  String toString() {
+    String umbrella =
+        "\n ID: $id \n POSITION: ($x,$y) \n LAUNGERS: $qtyLounger \n DISPONIBILITY: $disponibility \n";
+    return umbrella;
+  }
 }

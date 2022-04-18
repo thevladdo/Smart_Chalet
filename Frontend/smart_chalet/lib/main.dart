@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/Cubit/app_cubit_logics.dart';
 import 'package:smart_chalet/Cubit/app_cubits.dart';
+import 'package:smart_chalet/Services/umbrella_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +16,10 @@ void main() {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           home: BlocProvider<AppCubits>(
-            create: ((context) => AppCubits()),
-            //Child that can acces the cubits
+            create: ((context) => AppCubits(
+                  umbrella: UmbrellaService(),
+                )),
+            //Child that can acces the cubits, is the BlocBuilder with logic
             child: const AppCubitLogics(),
           ),
         );

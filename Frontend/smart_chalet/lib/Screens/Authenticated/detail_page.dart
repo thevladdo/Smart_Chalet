@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Screens/home_page.dart';
+import 'package:smart_chalet/Screens/Authenticated/home_page.dart';
 import 'package:smart_chalet/Widget/icons_buttons.dart';
 
 class DetailPage extends StatefulWidget {
@@ -12,6 +12,8 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   final _mainPageColor = const Color.fromARGB(255, 156, 177, 241);
+  int totalUmbrellas = 0;
+  int disponibility = 0;
   int gottenStars = 4;
   int selectedIndex = -1;
 
@@ -115,6 +117,17 @@ class _DetailPageState extends State<DetailPage> {
                             color: _mainPageColor,
                           ),
                         ),
+                        const SizedBox(width: 115),
+                        Text(
+                          'Free Seats $disponibility of $totalUmbrellas',
+                          style: TextStyle(
+                            fontFamily: 'Avenir Black',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            letterSpacing: -1,
+                            color: _mainPageColor,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -203,13 +216,23 @@ class _DetailPageState extends State<DetailPage> {
                 right: 30,
                 child: Row(
                   children: [
-                    SqaureButton(
-                      size: 60,
-                      color: _mainPageColor,
-                      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-                      borderColor: _mainPageColor,
-                      isIcon: true,
-                      icon: Icons.arrow_back_ios_new_rounded,
+                    GestureDetector(
+                      onTap: (() {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }),
+                      child: SqaureButton(
+                        size: 60,
+                        color: _mainPageColor,
+                        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                        borderColor: _mainPageColor,
+                        isIcon: true,
+                        icon: Icons.arrow_back_ios_new_rounded,
+                      ),
                     ),
                     const SizedBox(
                       width: 30,
