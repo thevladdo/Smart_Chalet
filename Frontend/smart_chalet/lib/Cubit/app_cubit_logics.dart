@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
 import 'package:smart_chalet/Cubit/app_cubits.dart';
+import 'package:smart_chalet/Screens/NavigationBarRoutes/navigator_page.dart';
+import 'package:smart_chalet/Screens/Non_Authenticated/login_page.dart';
+import 'package:smart_chalet/Screens/Non_Authenticated/registration_page.dart';
 import 'package:smart_chalet/Widget/loading_indicator.dart';
-import '../Screens/Authenticated/home_page.dart';
+import '../Screens/NavigationBarRoutes/Authenticated/detail_page.dart';
 import '../Screens/Non_Authenticated/welcome_page.dart';
 
 class AppCubitLogics extends StatefulWidget {
@@ -26,11 +29,23 @@ class _AppCubitLogicsState extends State<AppCubitLogics> {
         if (state is WelcomeState) {
           return const WelcomePage();
         }
+        if (state is RegState) {
+          return const RegPage();
+        }
+        if (state is LoginState) {
+          return const LoginPage();
+        }
+        if (state is NavState) {
+          return const NavigatorPage();
+        }
         if (state is LoadingState) {
           return const TriangleDotIndicator();
         }
+        if (state is HomeState) {
+          return const NavigatorPage();
+        }
         if (state is LoadedState) {
-          return const HomePage(); //TODO attenzione, non lasciare HomePage() e non fare la chiamata per ombrelli
+          return const DetailPage();
         } else {
           return const InkDropIndicator();
         }

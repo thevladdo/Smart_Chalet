@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../Widget/title_row.dart';
+import '../../../Widget/title_row.dart';
 
-class BarPage extends StatelessWidget {
-  const BarPage({Key? key}) : super(key: key);
+class AccountPage extends StatelessWidget {
+  const AccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class BarPage extends StatelessWidget {
           title: const TitleStack(),
         ),
         body: const Center(
-          child: Text('BAR'),
+          child: Text('ACCOUNT'),
         ));
   }
 }

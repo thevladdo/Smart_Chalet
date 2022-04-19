@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
+import '../../Cubit/app_cubits.dart';
 import '../../Widget/images.dart';
-import '../NavigationBarRoutes/navigator_page.dart';
 import 'registration_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,10 +18,10 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const IconBackButton(),
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
-          title: const TitleRow(),
+          title: const TitleStack(),
         ),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -171,12 +171,7 @@ class LoginFormState extends State<LoginForm> {
                         ),
                       ),
                     );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ),
-                    );
+                    BlocProvider.of<AppCubits>(context).jumpNavigator();
                   }
                 },
                 child: RichText(
@@ -238,8 +233,7 @@ class RegButton extends StatelessWidget {
             overlayColor: MaterialStateColor.resolveWith(
                 (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const RegPage()));
+          BlocProvider.of<AppCubits>(context).register();
         },
         child: RichText(
           text: const TextSpan(

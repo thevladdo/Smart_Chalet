@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:smart_chalet/Model/umbrella.dart';
 
 //States should have data
 abstract class CubitStates extends Equatable {}
@@ -26,10 +25,31 @@ class LoadingState extends CubitStates {
 
 //Triggered whend app is loaded
 class LoadedState extends CubitStates {
-  LoadedState(this.umbrellas);
+  LoadedState(this.loaded);
 
-  final List<Umbrella> umbrellas;
+  final List<dynamic> loaded;
 
   @override
-  List<Object> get props => [umbrellas];
+  List<Object> get props => [loaded];
+  //The prop can be directly accessed from BlocBuilder
+}
+
+class RegState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class NavState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class HomeState extends CubitStates {
+  @override
+  List<Object> get props => [];
 }

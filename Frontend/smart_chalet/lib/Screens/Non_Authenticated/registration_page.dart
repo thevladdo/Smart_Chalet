@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_chalet/Screens/NavigationBarRoutes/navigator_page.dart';
-import 'package:smart_chalet/Widget/icons_buttons.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
+import '../../Cubit/app_cubits.dart';
 import '../../Utilities/validator.dart';
 import '../../Widget/images.dart';
-import 'login_page.dart';
 
 class RegPage extends StatefulWidget {
   const RegPage({Key? key}) : super(key: key);
@@ -19,10 +18,10 @@ class _RegPageState extends State<RegPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const IconHomeButton(),
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 214, 225, 255),
-          title: const TitleRow(),
+          title: const TitleStack(),
         ),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -190,12 +189,7 @@ class RegFormState extends State<RegForm> {
                         ),
                       ),
                     );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ),
-                    );
+                    BlocProvider.of<AppCubits>(context).jumpNavigator();
                   }
                 },
                 child: RichText(
@@ -414,12 +408,7 @@ class LogInButton extends StatelessWidget {
             overlayColor: MaterialStateColor.resolveWith(
                 (states) => const Color.fromARGB(255, 214, 225, 255))),
         onPressed: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LoginPage(),
-            ),
-          );
+          BlocProvider.of<AppCubits>(context).login();
         },
         child: RichText(
           text: const TextSpan(

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
 import 'package:smart_chalet/Services/umbrella_service.dart';
 
@@ -12,21 +12,40 @@ class AppCubits extends Cubit<CubitStates> {
     emit(WelcomeState());
   }
 
-  final UmbrellaService
-      umbrella; //Oggetto Umbrella che attendo dalla chiamata di getData
-  late final umbrellas; //dynamic che può assumere qualsiasi tipo in base al contesto
+  final UmbrellaService umbrella;
+  //Oggetto Umbrella che attendo dalla chiamata di getData
+
+  dynamic loaded; //dynamic che può assumere qualsiasi tipo in base al contesto
 
   Future<void> getUmbrella() async {
     try {
+      loaded = null;
       emit(LoadingState());
-      umbrellas = await umbrella.getInfo();
-      print(umbrellas
-          .toString()); //TODO CERCA DI CAPIRE DOVE METTE LA LISTA PER USARLA NELLA VIEW
-      emit(LoadedState(umbrellas));
+      loaded = await umbrella.getInfo();
+      if (kDebugMode) {
+        print(loaded.toString());
+      }
+      emit(LoadedState(loaded));
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
     }
+  }
+
+  void register() {
+    emit(RegState());
+  }
+
+  void login() {
+    emit(LoginState());
+  }
+
+  void jumpNavigator() {
+    emit(NavState());
+  }
+
+  void jumpHome() {
+    emit(HomeState());
   }
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../Authenticated/home_page.dart';
-import 'account_page.dart';
-import 'bar_page.dart';
+import 'Authenticated/account_page.dart';
+import 'Authenticated/bar_page.dart';
+import 'Authenticated/home_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class NavigatorPage extends StatefulWidget {
+  const NavigatorPage({Key? key}) : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<NavigatorPage> createState() => _NavigatorPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _NavigatorPageState extends State<NavigatorPage> {
   List pages = [
     const HomePage(),
     const BarPage(),
