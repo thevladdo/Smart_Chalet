@@ -7,12 +7,21 @@ class Reservation {
   List<Umbrella> umbrellas;
   //= List<Umbrella>.empty(growable: true)
 
-  Reservation(
-    this.id,
-    this.userId,
-    this.date,
-    this.umbrellas,
-  );
+  Reservation({
+    required this.id,
+    required this.userId,
+    required this.date,
+    required this.umbrellas,
+  });
+
+  factory Reservation.fromJson(Map<String, dynamic> json) {
+    return Reservation(
+      id: json["id"],
+      userId: json["userId"],
+      date: json["date"],
+      umbrellas: json["umbrellas"],
+    );
+  }
 
   String get getId => id;
 

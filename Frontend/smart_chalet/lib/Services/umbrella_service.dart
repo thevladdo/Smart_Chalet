@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_chalet/Model/umbrella.dart';
+import 'Exception/backend_exception.dart';
 
 class UmbrellaService {
   String baseUrl = "http://localhost:8080/smartchalet";
@@ -16,13 +17,13 @@ class UmbrellaService {
         //return the list converted to map where "e" is one of the "objects" returned by json
         return list.map((e) => Umbrella.fromJson(e)).toList();
       } else {
-        return <Umbrella>[];
+        throw (BackendException(json.decode(res.body)["message"]));
       }
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
-      return <Umbrella>[];
+      throw (BackendException(json.decode(res.body)["message"]));
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_chalet/Model/auth_credential.dart';
+import 'package:smart_chalet/Services/register_service.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../../Cubit/app_cubits.dart';
 import '../../Utilities/validator.dart';
@@ -189,6 +191,12 @@ class RegFormState extends State<RegForm> {
                         ),
                       ),
                     );
+                    print(await RegisterService().register(
+                        user['name']!,
+                        user['surname']!,
+                        user['email']!,
+                        user['password']!,
+                        Role.CLIENT));
                     BlocProvider.of<AppCubits>(context).jumpNavigator();
                   }
                 },

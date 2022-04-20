@@ -1,5 +1,8 @@
 package it.unicam.cs.ids.smartchalet.Controller;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import it.unicam.cs.ids.smartchalet.Model.Reservation;
 import it.unicam.cs.ids.smartchalet.Service.ReservationService;
 import it.unicam.cs.ids.smartchalet.Security.AccessCheckerComponent;
@@ -34,9 +37,10 @@ public class ReservationController {
         return service.getStatus();
     }
 
-    @GetMapping("/get")
+
+    @GetMapping("/get/{id}")
     @PreAuthorize("(hasAuthority('MANAGER') or hasAuthority('CLIENT') or hasAuthority('RECEPTION_STAFF'))")
-    public Reservation getReservation(UUID id){
+    public Reservation getReservation(@PathVariable UUID id){
         return service.getReservation(id);
     }
 

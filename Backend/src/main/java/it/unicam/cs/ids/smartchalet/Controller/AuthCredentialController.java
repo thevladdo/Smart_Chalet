@@ -31,7 +31,7 @@ public class AuthCredentialController {
         } else return null;
     }
 
-    @PostMapping("/ public/addCredential")
+    @PostMapping("/public/addCredential")
     @PreAuthorize("permitAll")
     public String addCredential(@RequestBody @Param("credential") AuthCredential credentials) {
         authCredentialService.addCredentials(credentials);

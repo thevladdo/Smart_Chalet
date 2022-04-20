@@ -5,16 +5,20 @@ class AuthCredential {
   String password;
   List<Role> _roles = [];
 
-  AuthCredential(
-    this.mail,
-    this.password,
-  );
+  AuthCredential({
+    required this.mail,
+    required this.password,
+  });
 
   AuthCredential.complete(
     this.mail,
     this.password,
     this._roles,
   );
+
+  factory AuthCredential.fromJson(Map<String, dynamic> json) {
+    return AuthCredential(mail: json["mail"], password: json["password"]);
+  }
 
   String get getMail => mail;
 
@@ -24,9 +28,9 @@ class AuthCredential {
 
   set setPassword(password) => this.password = password;
 
-  get roles => _roles;
+  get getRoles => _roles;
 
-  set roles(value) => _roles = value;
+  set setRoles(value) => _roles = value;
 
   List<String> getRolesToString() {
     List<String> roles = [];

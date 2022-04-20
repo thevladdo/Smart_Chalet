@@ -29,6 +29,7 @@ public class AppUserController {
     }
 
     @PostMapping("/public/add")
+    @PreAuthorize("permitAll")
     public AppUser addUser(@RequestBody @Param("user") AppUser user){
         AuthCredential authCredential = authCredentialService.getAuthCredentialsInstance(user.getMail());
         authCredential.setRole(user.getRole());
