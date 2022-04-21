@@ -16,10 +16,11 @@ class Reservation {
 
   factory Reservation.fromJson(Map<String, dynamic> json) {
     return Reservation(
-      id: json["id"],
-      userId: json["userId"],
-      date: json["date"],
-      umbrellas: json["umbrellas"],
+      id: json['0'],
+      userId: json['1'],
+      date: json['2'],
+      umbrellas:
+          (json['3'[0]]).cast().map((item) => Umbrella.fromJson(item)).toList(),
     );
   }
 
@@ -38,4 +39,12 @@ class Reservation {
   get getUmbrellas => umbrellas;
 
   set setUmbrellas(umbrellas) => this.umbrellas = umbrellas;
+
+  @override
+  String toString() {
+    String uToPrint = getUmbrellas[0].toString();
+    String reservation =
+        "\n ID: $id \n USER ID: ($userId) \n DATE: $date \n UMBRELLAS: $uToPrint \n";
+    return reservation;
+  }
 }
