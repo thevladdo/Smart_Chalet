@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/Model/auth_credential.dart';
-import 'package:smart_chalet/Services/register_service.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../../Cubit/app_cubits.dart';
 import '../../Utilities/validator.dart';
@@ -169,35 +168,12 @@ class RegFormState extends State<RegForm> {
                       'password': _passwordController.text,
                     };
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor:
-                            const Color.fromARGB(255, 86, 163, 174),
-                        elevation: 0,
-                        action: SnackBarAction(
-                          label: 'Thanks',
-                          textColor: const Color.fromARGB(255, 169, 232, 221),
-                          onPressed: () {
-                            DismissAction;
-                          },
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        content: Text(
-                          user.toString(),
-                        ),
-                      ),
-                    );
-                    print(await RegisterService().register(
+                    BlocProvider.of<AppCubits>(context).getUserReg(
                         user['name']!,
                         user['surname']!,
                         user['email']!,
                         user['password']!,
-                        Role.CLIENT));
-                    BlocProvider.of<AppCubits>(context).jumpNavigator();
+                        Role.CLIENT);
                   }
                 },
                 child: RichText(

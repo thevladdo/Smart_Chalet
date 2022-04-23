@@ -34,6 +34,6 @@ class AppUser {
         name: json['name'],
         surname: json['surname'],
         mail: json['mail'],
-        role: json['role']);
+        role: Role.CLIENT);
   }
 }

@@ -112,9 +112,10 @@ class LogOutButton extends StatelessWidget {
       color: const Color.fromARGB(255, 253, 210, 210),
       onPressed: () async {
         var a = await ReservationService().getReservationInfo();
-        for (var k in a.keys) {
-          print(a[k]); //TODO This prints only umbrellas, why ?
-        }
+        print(a.toString());
+        // for (String k in a.keys) {
+        //   print(a[k]); //TODO This prints only umbrellas, why ?
+        // }
       },
       child: const Text(
         'Logout',
