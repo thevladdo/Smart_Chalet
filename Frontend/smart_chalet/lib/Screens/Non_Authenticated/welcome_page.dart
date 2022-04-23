@@ -67,6 +67,12 @@ class WelcomePage extends StatelessWidget {
                     left: 75,
                     right: 75,
                     child: StartLogInButton(),
+                  ),
+                  const Positioned(
+                    bottom: 285,
+                    left: 75,
+                    right: 75,
+                    child: AboutUsButton(),
                   )
                 ],
               ),
@@ -176,6 +182,36 @@ class StartLogInButton extends StatelessWidget {
             ],
           ),
           textAlign: TextAlign.end,
+        ),
+      ),
+    );
+  }
+}
+
+class AboutUsButton extends StatelessWidget {
+  const AboutUsButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+      child: TextButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateColor.resolveWith(
+                (states) => const Color.fromARGB(255, 214, 225, 255))),
+        onPressed: () async {
+          BlocProvider.of<AppCubits>(context).aboutUs();
+        },
+        child: RichText(
+          text: const TextSpan(
+            text: 'About us',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              color: Color.fromARGB(255, 120, 125, 141),
+              letterSpacing: -1,
+            ),
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
+import 'package:smart_chalet/Services/login_service.dart';
 import 'package:smart_chalet/Services/register_service.dart';
 import 'package:smart_chalet/Services/umbrella_service.dart';
 
@@ -8,13 +9,17 @@ import '../Model/auth_credential.dart';
 
 class AppCubits extends Cubit<CubitStates> {
   // When the initialization of the page (InitialState) will be done, then...
-  AppCubits({required this.umbrella, required this.registerService})
-      : super(InitialState()) {
+  AppCubits({
+    required this.umbrella,
+    required this.registerService,
+    required this.loginService,
+  }) : super(InitialState()) {
     // ..trigger this state
     emit(WelcomeState());
   }
 
   final RegisterService registerService;
+  final LoginService loginService;
   final UmbrellaService umbrella;
   //Oggetto Umbrella che attendo dalla chiamata di getData
 
@@ -46,9 +51,27 @@ class AppCubits extends Cubit<CubitStates> {
           await registerService.register(name, surname, mail, password, role);
       List<dynamic> users = [];
       users.add(user);
-      emit(LoadedState(users));
+      LoadedUserState(users).setName();
+      emit(LoadedUserState(users));
     } catch (e) {
-      //TODO Error state
+      emit(RegErrorState());
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  Future<void> getUserLogin(String mail, String password, Role role) async {
+    try {
+      user = null;
+      emit(LoadingState());
+      user = await LoginService().login(mail, password, role);
+      List<dynamic> users = [];
+      users.add(user);
+      LoadedUserState(users).setName();
+      emit(LoadedUserState(users));
+    } catch (e) {
+      emit(RegErrorState());
       if (kDebugMode) {
         print(e);
       }
@@ -57,6 +80,14 @@ class AppCubits extends Cubit<CubitStates> {
 
   void register() {
     emit(RegState());
+  }
+
+  void backToWelcome() {
+    emit(WelcomeState());
+  }
+
+  void aboutUs() {
+    emit(AboutUsState());
   }
 
   void login() {
@@ -69,5 +100,9 @@ class AppCubits extends Cubit<CubitStates> {
 
   void jumpHome() {
     emit(HomeState());
+  }
+
+  void reservePage() {
+    emit(ReserveNowState());
   }
 }

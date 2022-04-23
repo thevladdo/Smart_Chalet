@@ -165,7 +165,11 @@ class _DetailPageState extends State<DetailPage> {
                               icon: Icons.arrow_back_ios_new_rounded),
                         ),
                         const SizedBox(width: 30),
-                        const ArrowButton()
+                        ArrowButton(
+                          onTap: () {
+                            BlocProvider.of<AppCubits>(context).reservePage();
+                          },
+                        )
                       ])),
                   Positioned(
                       top: 407,
@@ -364,12 +368,20 @@ class SubParagraphText extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ArrowButton extends StatelessWidget {
-  const ArrowButton({Key? key}) : super(key: key);
+  var onTap;
+
+  ArrowButton({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ArrowsButton(
+      onTap: onTap,
+      text: 'Ready to Book',
       color: const Color.fromARGB(255, 147, 182, 253),
       isResponsive: true,
     );

@@ -22,9 +22,9 @@ public class AppUserController {
     @Autowired
     private AccessCheckerComponent accessCheckerComponent;
 
-    @GetMapping("/get")
+    @GetMapping("/get/{mail}")
     @PreAuthorize("@accessCheckerComponent.sameUser(principal, #mail) or hasAuthority('MANAGER')")
-    public AppUser getUser(String mail){
+    public AppUser getUser(@PathVariable String mail){
         return userService.findById(mail);
     }
 

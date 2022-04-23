@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_chalet/Services/login_service.dart';
 import 'package:smart_chalet/Services/register_service.dart';
 import 'Cubit/app_cubit_logics.dart';
 import 'Cubit/app_cubits.dart';
@@ -20,6 +21,7 @@ void main() {
             create: ((context) => AppCubits(
                   registerService: RegisterService(),
                   umbrella: UmbrellaService(),
+                  loginService: LoginService(),
                 )),
             //Child that can acces the cubits, is the BlocBuilder with logic
             child: const AppCubitLogics(),

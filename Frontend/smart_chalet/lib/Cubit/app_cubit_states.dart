@@ -1,4 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:smart_chalet/Model/app_user.dart';
+
+import '../Utilities/account_details.dart';
 
 //States should have data
 abstract class CubitStates extends Equatable {}
@@ -34,6 +37,22 @@ class LoadedState extends CubitStates {
   //The prop can be directly accessed from BlocBuilder
 }
 
+class LoadedUserState extends CubitStates {
+  LoadedUserState(this.loadedUser);
+
+  final List<dynamic> loadedUser;
+
+  setName() {
+    AppUser appUser = loadedUser[0];
+    String name = appUser.getName;
+    GlobUser().setName(name);
+  }
+
+  @override
+  List<Object> get props => [loadedUser];
+  //The prop can be directly accessed from BlocBuilder
+}
+
 class RegState extends CubitStates {
   @override
   List<Object> get props => [];
@@ -50,6 +69,26 @@ class NavState extends CubitStates {
 }
 
 class HomeState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class RegErrorState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginErrorState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class AboutUsState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class ReserveNowState extends CubitStates {
   @override
   List<Object> get props => [];
 }

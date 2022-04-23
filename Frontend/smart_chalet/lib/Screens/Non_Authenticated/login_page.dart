@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_chalet/Widget/title_row.dart';
 import '../../Cubit/app_cubits.dart';
+import '../../Model/auth_credential.dart';
 import '../../Widget/images.dart';
 import 'registration_page.dart';
 
@@ -150,28 +151,12 @@ class LoginFormState extends State<LoginForm> {
                       'email': _emailController.text,
                       'password': _passwordController.text,
                     };
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor:
-                            const Color.fromARGB(255, 86, 163, 174),
-                        elevation: 0,
-                        action: SnackBarAction(
-                            label: 'Thanks',
-                            textColor: const Color.fromARGB(255, 169, 232, 221),
-                            onPressed: () {
-                              DismissAction;
-                            }),
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        content: Text(
-                          user.toString(),
-                        ),
-                      ),
+
+                    BlocProvider.of<AppCubits>(context).getUserLogin(
+                      user['email']!,
+                      user['password']!,
+                      Role.CLIENT,
                     );
-                    BlocProvider.of<AppCubits>(context).jumpNavigator();
                   }
                 },
                 child: RichText(

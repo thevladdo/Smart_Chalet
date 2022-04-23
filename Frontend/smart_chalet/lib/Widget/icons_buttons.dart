@@ -97,44 +97,51 @@ class ArrowsButton extends StatelessWidget {
   bool? isResponsive;
   double? width;
   Color color;
+  final String text;
+  var onTap;
 
   ArrowsButton({
     Key? key,
+    this.onTap,
     this.isResponsive = false,
     this.width = 120,
     required this.color,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Flexible shoud be wrapped around whit row or columns
     return Flexible(
-      child: Container(
-        width: isResponsive == true ? 100.w : width,
-        height: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: color,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 5),
-          child: Row(
-            mainAxisAlignment: isResponsive == true
-                ? MainAxisAlignment.spaceBetween
-                : MainAxisAlignment.center,
-            children: [
-              isResponsive == true
-                  ? const Text(
-                      'Ready to Book',
-                      style: TextStyle(
-                        fontSize: 15,
-                        letterSpacing: 0,
-                        color: Colors.white,
-                      ),
-                    )
-                  : Container(),
-              Image.asset('assets/images/button_arrow.png')
-            ],
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: isResponsive == true ? 100.w : width,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: color,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30, right: 5),
+            child: Row(
+              mainAxisAlignment: isResponsive == true
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
+              children: [
+                isResponsive == true
+                    ? Text(
+                        text,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          letterSpacing: 0,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Container(),
+                Image.asset('assets/images/button_arrow.png')
+              ],
+            ),
           ),
         ),
       ),

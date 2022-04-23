@@ -320,7 +320,9 @@ class BookNowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedButton(
       color: const Color.fromARGB(255, 210, 221, 253),
-      onPressed: () {},
+      onPressed: () {
+        BlocProvider.of<AppCubits>(context).getUmbrella();
+      },
       child: const Text(
         'BOOK NOW',
         style: TextStyle(

@@ -99,6 +99,7 @@ class GradientFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50.h,
+      width: 100.w,
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/images/Gradient_Home.png'),
@@ -288,6 +289,25 @@ class Tshirt extends StatelessWidget {
           opacity: opacity,
           image: const AssetImage('assets/images/Voyage/t-shirt.png'),
           fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class SwimGirlImage extends StatelessWidget {
+  final double opacity;
+  const SwimGirlImage({Key? key, required this.opacity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.w,
+      height: 400,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          opacity: opacity,
+          image: const AssetImage('assets/images/Voyage/swim_girl.png'),
         ),
       ),
     );
