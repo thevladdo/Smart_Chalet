@@ -26,6 +26,7 @@ class LoginService {
         if (kDebugMode) {
           print(token);
         }
+        BasicAuthConfig().deleteAuthCredential;
         BasicAuthConfig().setAuthCredential(token);
         String apiUserUrl = '/user/get/$mail';
         http.Response resUser = await http.get(

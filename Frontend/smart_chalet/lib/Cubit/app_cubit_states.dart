@@ -89,6 +89,18 @@ class AboutUsState extends CubitStates {
 }
 
 class ReserveNowState extends CubitStates {
+  ReserveNowState(
+    this.selectedDate,
+    this.dateCount,
+    this.range,
+    this.rangeCount,
+  );
+
+  final String selectedDate;
+  final String dateCount;
+  final String range;
+  final String rangeCount;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [selectedDate, dateCount, range, rangeCount];
 }

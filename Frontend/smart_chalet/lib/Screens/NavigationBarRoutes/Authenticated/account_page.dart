@@ -2,8 +2,9 @@
 
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Utilities/account_details.dart';
-import '../../../Services/get_reservation.dart';
+import '../../../Cubit/app_cubits.dart';
 import '../../../Widget/images.dart';
 import '../../../Widget/title_row.dart';
 
@@ -115,11 +116,7 @@ class LogOutButton extends StatelessWidget {
       width: 100,
       color: const Color.fromARGB(255, 253, 210, 210),
       onPressed: () async {
-        var a = await ReservationService().getReservationInfo();
-        print(a.toString());
-        // for (String k in a.keys) {
-        //   print(a[k]); //TODO This prints only umbrellas, why ?
-        // }
+        BlocProvider.of<AppCubits>(context).logOut();
       },
       child: const Text(
         'Logout',

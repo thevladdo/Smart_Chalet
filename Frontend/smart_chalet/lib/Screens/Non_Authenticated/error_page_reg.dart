@@ -6,8 +6,8 @@ import 'package:smart_chalet/Cubit/app_cubits.dart';
 import '../../../Widget/images.dart';
 import '../../../Widget/title_row.dart';
 
-class ErrorPage extends StatelessWidget {
-  const ErrorPage({Key? key}) : super(key: key);
+class ErrorPageReg extends StatelessWidget {
+  const ErrorPageReg({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

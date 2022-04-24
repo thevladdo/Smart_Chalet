@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -92,9 +94,9 @@ class _DetailPageState extends State<DetailPage> {
                                 style: TextStyle(color: Colors.black38))
                           ]),
                           const SizedBox(height: 25),
-                          const ParagraphTitle(text: 'People'),
+                          ParagraphTitle(TextAlign.left, text: 'People'),
                           const SizedBox(height: 5),
-                          const SubParagraphText(
+                          SubParagraphText(TextAlign.left,
                               text: 'Number of people in your group'),
                           const SizedBox(height: 15),
                           Wrap(
@@ -137,9 +139,10 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                           const SizedBox(height: 25),
-                          const ParagraphTitle(text: 'Details'),
+                          ParagraphTitle(TextAlign.left, text: 'Details'),
                           const SizedBox(height: 5),
-                          const SubParagraphText(
+                          SubParagraphText(
+                            TextAlign.left,
                             text:
                                 'Maria Beach is one of the most exotic beaches in the Mediterranean Sea. Full of tasty buffets and unique drinks, it awaits you for your holiday',
                           )
@@ -166,8 +169,10 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         const SizedBox(width: 30),
                         ArrowButton(
+                          text: 'Ready to Book',
                           onTap: () {
-                            BlocProvider.of<AppCubits>(context).reservePage();
+                            BlocProvider.of<AppCubits>(context)
+                                .reservePage('', '', '', '');
                           },
                         )
                       ])),
@@ -331,14 +336,18 @@ class Stars extends StatelessWidget {
 }
 
 class ParagraphTitle extends StatelessWidget {
+  TextAlign alignment;
+
   final String text;
 
-  const ParagraphTitle({Key? key, required this.text}) : super(key: key);
+  ParagraphTitle(this.alignment, {Key? key, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: alignment,
       style: const TextStyle(
         fontFamily: 'Avenir Black',
         fontWeight: FontWeight.w700,
@@ -351,14 +360,18 @@ class ParagraphTitle extends StatelessWidget {
 }
 
 class SubParagraphText extends StatelessWidget {
+  TextAlign alignment;
+
   final String text;
 
-  const SubParagraphText({Key? key, required this.text}) : super(key: key);
+  SubParagraphText(this.alignment, {Key? key, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: alignment,
       style: const TextStyle(
         fontSize: 14,
         letterSpacing: 0,
@@ -368,20 +381,21 @@ class SubParagraphText extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class ArrowButton extends StatelessWidget {
+  final String text;
   var onTap;
 
   ArrowButton({
     Key? key,
     this.onTap,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ArrowsButton(
       onTap: onTap,
-      text: 'Ready to Book',
+      text: text,
       color: const Color.fromARGB(255, 147, 182, 253),
       isResponsive: true,
     );

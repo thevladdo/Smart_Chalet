@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                     child: StartLogInButton(),
                   ),
                   const Positioned(
-                    bottom: 285,
+                    bottom: 290,
                     left: 75,
                     right: 75,
                     child: AboutUsButton(),
@@ -208,7 +208,7 @@ class AboutUsButton extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 15,
-              color: Color.fromARGB(255, 120, 125, 141),
+              color: Color.fromARGB(255, 144, 150, 170),
               letterSpacing: -1,
             ),
           ),

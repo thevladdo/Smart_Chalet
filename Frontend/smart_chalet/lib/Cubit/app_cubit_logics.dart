@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
 import 'package:smart_chalet/Cubit/app_cubits.dart';
 import 'package:smart_chalet/Screens/NavigationBarRoutes/navigator_page.dart';
-import 'package:smart_chalet/Screens/Non_Authenticated/error_page.dart';
+import 'package:smart_chalet/Screens/Non_Authenticated/error_page_login.dart';
+import 'package:smart_chalet/Screens/Non_Authenticated/error_page_reg.dart';
 import 'package:smart_chalet/Screens/Non_Authenticated/login_page.dart';
 import 'package:smart_chalet/Screens/Non_Authenticated/registration_page.dart';
 import 'package:smart_chalet/Widget/loading_indicator.dart';
@@ -48,7 +49,10 @@ class _AppCubitLogicsState extends State<AppCubitLogics> {
           return const NavigatorPage();
         }
         if (state is RegErrorState) {
-          return const ErrorPage();
+          return const ErrorPageReg();
+        }
+        if (state is LoginErrorState) {
+          return const ErrorPageLogin();
         }
         if (state is LoadingState) {
           return const TriangleDotIndicator();
@@ -57,7 +61,8 @@ class _AppCubitLogicsState extends State<AppCubitLogics> {
           return const NavigatorPage();
         }
         if (state is ReserveNowState) {
-          return const ReservationPage();
+          return ReservationPage(state.selectedDate, state.dateCount,
+              state.range, state.rangeCount);
         }
         if (state is LoadedState) {
           return const DetailPage();

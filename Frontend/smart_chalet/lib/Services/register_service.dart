@@ -42,6 +42,7 @@ class RegisterService {
           if (kDebugMode) {
             print(token);
           }
+          BasicAuthConfig().deleteAuthCredential;
           BasicAuthConfig().setAuthCredential(token);
 
           Map<String, dynamic> myMap =

@@ -71,7 +71,7 @@ class AppCubits extends Cubit<CubitStates> {
       LoadedUserState(users).setName();
       emit(LoadedUserState(users));
     } catch (e) {
-      emit(RegErrorState());
+      emit(LoginErrorState());
       if (kDebugMode) {
         print(e);
       }
@@ -80,6 +80,10 @@ class AppCubits extends Cubit<CubitStates> {
 
   void register() {
     emit(RegState());
+  }
+
+  void logOut() {
+    emit(WelcomeState());
   }
 
   void backToWelcome() {
@@ -102,7 +106,8 @@ class AppCubits extends Cubit<CubitStates> {
     emit(HomeState());
   }
 
-  void reservePage() {
-    emit(ReserveNowState());
+  void reservePage(
+      String selectedDate, String dateCount, String range, String rangeCount) {
+    emit(ReserveNowState(selectedDate, dateCount, range, rangeCount));
   }
 }
