@@ -30,20 +30,16 @@ public class AuthCredentialService implements UserDetailsService {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid login");
     }
 
-    public boolean addCredentials(@NonNull AuthCredential authCredentials) throws ResponseStatusException {
+    public void addCredentials(@NonNull AuthCredential authCredentials) throws ResponseStatusException {
         authCredentials.setPassword(new BCryptPasswordEncoder().encode(authCredentials.getPassword()));
-        authCredentials.setRole(AuthCredential.Role.NOT_COMPLETED);
         if (repository.existsById(authCredentials.getMail()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid signup");
-
         repository.insert(authCredentials);
-        return true;
     }
 
     public boolean updateCredentials(@NonNull AuthCredential authCredentials) {
         if (!repository.existsById(authCredentials.getMail()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid update");
-
         authCredentials.setPassword(new BCryptPasswordEncoder().encode(authCredentials.getPassword()));
         repository.save(authCredentials);
         return true;
@@ -52,7 +48,6 @@ public class AuthCredentialService implements UserDetailsService {
     public boolean updateRolesCredential(@NonNull AuthCredential authCredentials) {
         if (!repository.existsById(authCredentials.getMail()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid update");
-
         repository.save(authCredentials);
         return true;
     }

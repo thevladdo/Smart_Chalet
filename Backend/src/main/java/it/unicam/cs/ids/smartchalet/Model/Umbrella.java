@@ -11,6 +11,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Umbrella {
 
+    @EqualsAndHashCode.Include
     @Id
     private UUID id;
     private int y;

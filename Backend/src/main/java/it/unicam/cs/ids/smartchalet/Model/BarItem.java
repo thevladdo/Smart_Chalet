@@ -13,7 +13,8 @@ public class BarItem {
 
     @Id
     private UUID id;
-    private double price;
+    private int integerPrice;
+    private int decimalPrice;
     private int disponibility;
     private String name;
 

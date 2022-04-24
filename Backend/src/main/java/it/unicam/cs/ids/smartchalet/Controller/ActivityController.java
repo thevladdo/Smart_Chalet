@@ -2,7 +2,9 @@ package it.unicam.cs.ids.smartchalet.Controller;
 
 import it.unicam.cs.ids.smartchalet.Model.Activity;
 import it.unicam.cs.ids.smartchalet.Service.ActivityService;
+import it.unicam.cs.ids.smartchalet.Security.AccessCheckerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,27 +16,24 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
+    @Autowired
+    private AccessCheckerComponent accessCheckerComponent;
+
     @PostMapping("/new")
-    @PreAuthorize("hasAuthority('MANAGER') and @accessCheckerComponent.sameUser(principal, #activity.getUserMail())")
-    public Activity add(Activity activity){
+    @PreAuthorize("hasAuthority('MANAGER')")
+    public Activity add(@RequestBody @Param("activity") Activity activity){
         return activityService.addActiviy(activity);
     }
 
-    @GetMapping("/public/get/{name}")
-    public Activity get(@PathVariable String name){
-        return activityService.getByName(name);
-    }
-
-    @DeleteMapping("/delete")
-    //TODO Controllare se va bene senza @accesCheckerComponent
+    @DeleteMapping("/delete/{name}")
     @PreAuthorize("hasAuthority('MANAGER')")
-    public boolean delete(String name){
+    public boolean delete(@PathVariable String name){
         return activityService.deleteActivity(name);
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('MANAGER') and @accessCheckerComponent.sameUser(principal, #activity.getUserMail())")
-    public Activity update( Activity activity){
+    @PreAuthorize("hasAuthority('MANAGER')")
+    public Activity update(@RequestBody @Param("activity") Activity activity){
         return activityService.updateActivity(activity);
     }
 
