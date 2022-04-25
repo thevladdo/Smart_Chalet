@@ -37,6 +37,16 @@ class LoadedState extends CubitStates {
   //The prop can be directly accessed from BlocBuilder
 }
 
+class LoadedResState extends CubitStates {
+  LoadedResState(this.res);
+
+  final dynamic res;
+
+  @override
+  List<Object> get props => [res];
+  //The prop can be directly accessed from BlocBuilder
+}
+
 class LoadedUserState extends CubitStates {
   LoadedUserState(this.loadedUser);
 

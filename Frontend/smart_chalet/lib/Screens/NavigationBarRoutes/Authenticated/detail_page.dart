@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -7,6 +8,7 @@ import 'package:smart_chalet/Cubit/app_cubit_states.dart';
 import 'package:smart_chalet/Cubit/app_cubits.dart';
 import 'package:smart_chalet/Model/umbrella.dart';
 import 'package:smart_chalet/Widget/icons_buttons.dart';
+import 'package:smart_chalet/Widget/loading_indicator.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -169,12 +171,20 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         const SizedBox(width: 30),
                         ArrowButton(
-                          text: 'Ready to Book',
-                          onTap: () {
-                            BlocProvider.of<AppCubits>(context)
-                                .reservePage('', '', '', '');
-                          },
-                        )
+                            text: 'Ready to Book',
+                            onTap: () {
+                              int freeSeats = disponibility * 2;
+                              if (selectedIndex + 1 > disponibility * 2) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => DetailDialog(
+                                          freeSeats: freeSeats,
+                                        ));
+                              } else {
+                                BlocProvider.of<AppCubits>(context)
+                                    .reservePage('', '', '', '');
+                              }
+                            })
                       ])),
                   Positioned(
                       top: 407,
@@ -190,7 +200,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
           );
         } else {
-          return Container(); //TODO CREATE CONNECTION ERROR SCREEN
+          return const InkDropIndicator();
         }
       },
     );
@@ -254,6 +264,7 @@ class BeachNameText extends StatelessWidget {
 
 class Price extends StatelessWidget {
   final int price;
+  // ignore: prefer_typing_uninitialized_variables
   final selectedIndex;
   const Price({Key? key, required this.price, required this.selectedIndex})
       : super(key: key);
@@ -383,6 +394,7 @@ class SubParagraphText extends StatelessWidget {
 
 class ArrowButton extends StatelessWidget {
   final String text;
+  // ignore: prefer_typing_uninitialized_variables
   var onTap;
 
   ArrowButton({
@@ -398,6 +410,55 @@ class ArrowButton extends StatelessWidget {
       text: text,
       color: const Color.fromARGB(255, 147, 182, 253),
       isResponsive: true,
+    );
+  }
+}
+
+class DialogButton extends StatelessWidget {
+  const DialogButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedButton(
+      height: 40,
+      width: 65,
+      color: const Color.fromARGB(255, 251, 127, 118),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const Text(
+        'OK',
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+}
+
+class DetailDialog extends StatelessWidget {
+  final int freeSeats;
+  const DetailDialog({Key? key, required this.freeSeats}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(35),
+        ),
+      ),
+      actionsAlignment: MainAxisAlignment.center,
+      actionsPadding: const EdgeInsets.only(bottom: 10),
+      actions: const [
+        DialogButton(),
+      ],
+      content: Container(
+        padding: const EdgeInsets.only(left: 30, right: 30),
+        height: 50,
+        child: ParagraphTitle(
+          TextAlign.center,
+          text: 'Sorry but there are only $freeSeats free seats',
+        ),
+      ),
     );
   }
 }

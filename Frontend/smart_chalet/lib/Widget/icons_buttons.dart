@@ -98,6 +98,7 @@ class ArrowsButton extends StatelessWidget {
   double? width;
   Color color;
   final String text;
+  // ignore: prefer_typing_uninitialized_variables
   var onTap;
 
   ArrowsButton({

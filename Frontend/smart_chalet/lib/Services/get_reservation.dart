@@ -19,7 +19,7 @@ class ReservationService {
       if (res.statusCode == 200) {
         Map<String, dynamic> decodedMap = Map.castFrom(json.decode(res.body));
         Reservation reservation = Reservation.fromJson(decodedMap);
-        return reservation; //TODO Return reservation not map
+        return reservation;
       } else {
         throw (BackendException(json.decode(res.body)["message"]));
       }

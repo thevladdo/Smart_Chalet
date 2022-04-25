@@ -86,32 +86,32 @@ class ReservationPage extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(35))),
-                            content: Container(
-                              padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
-                              height: range!.isNotEmpty ? 200 : 150,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  range!.isNotEmpty
-                                      ? (ParagraphTitle(TextAlign.center,
-                                          text:
-                                              'Thank you for your reservation !'))
-                                      : (ParagraphTitle(TextAlign.center,
-                                          text:
-                                              'Please select a valid date range !')),
-                                  const SizedBox(height: 10),
-                                  range!.isNotEmpty
-                                      ? (SubParagraphText(TextAlign.center,
-                                          text: 'See you in $range'))
-                                      : (SubParagraphText(TextAlign.center,
-                                          text: ':(')),
-                                ],
-                              ),
-                            )),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(35))),
+                          content: Container(
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            height: range!.isNotEmpty ? 200 : 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                range!.isNotEmpty
+                                    ? (ParagraphTitle(TextAlign.center,
+                                        text:
+                                            'Thank you for your reservation !'))
+                                    : (ParagraphTitle(TextAlign.center,
+                                        text:
+                                            'Please select a valid date range !')),
+                                const SizedBox(height: 10),
+                                range!.isNotEmpty
+                                    ? (SubParagraphText(TextAlign.center,
+                                        text: 'See you in $range'))
+                                    : (SubParagraphText(TextAlign.center,
+                                        text: ':(')),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                       //  BlocProvider.of<AppCubits>(context).jumpHome();
                     },

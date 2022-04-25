@@ -275,15 +275,23 @@ class Sunglass extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Tshirt extends StatelessWidget {
   final double opacity;
-  const Tshirt({Key? key, required this.opacity}) : super(key: key);
+  double? height;
+  double? width;
+  Tshirt({
+    Key? key,
+    required this.opacity,
+    this.height = 40,
+    this.width = 100,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100.w,
-      height: 40.h,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         image: DecorationImage(
           opacity: opacity,

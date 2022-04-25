@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
 import 'package:smart_chalet/Cubit/app_cubits.dart';
+import 'package:smart_chalet/Screens/NavigationBarRoutes/Authenticated/reservations_page.dart';
 import 'package:smart_chalet/Screens/NavigationBarRoutes/navigator_page.dart';
 import 'package:smart_chalet/Screens/Non_Authenticated/error_page_login.dart';
 import 'package:smart_chalet/Screens/Non_Authenticated/error_page_reg.dart';
@@ -59,6 +60,9 @@ class _AppCubitLogicsState extends State<AppCubitLogics> {
         }
         if (state is LoadedUserState) {
           return const NavigatorPage();
+        }
+        if (state is LoadedResState) {
+          return const ReservationsList();
         }
         if (state is ReserveNowState) {
           return ReservationPage(state.selectedDate, state.dateCount,

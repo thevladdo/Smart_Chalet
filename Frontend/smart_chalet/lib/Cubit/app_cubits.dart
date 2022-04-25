@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
+import 'package:smart_chalet/Services/get_reservation.dart';
 import 'package:smart_chalet/Services/login_service.dart';
 import 'package:smart_chalet/Services/register_service.dart';
 import 'package:smart_chalet/Services/umbrella_service.dart';
@@ -10,6 +11,7 @@ import '../Model/auth_credential.dart';
 class AppCubits extends Cubit<CubitStates> {
   // When the initialization of the page (InitialState) will be done, then...
   AppCubits({
+    required this.reservationService,
     required this.umbrella,
     required this.registerService,
     required this.loginService,
@@ -21,10 +23,12 @@ class AppCubits extends Cubit<CubitStates> {
   final RegisterService registerService;
   final LoginService loginService;
   final UmbrellaService umbrella;
+  final ReservationService reservationService;
   //Oggetto Umbrella che attendo dalla chiamata di getData
 
   dynamic loaded; //dynamic che può assumere qualsiasi tipo in base al contesto
   dynamic user;
+  dynamic res;
 
   Future<void> getUmbrella() async {
     try {
@@ -35,6 +39,22 @@ class AppCubits extends Cubit<CubitStates> {
         print(loaded.toString());
       }
       emit(LoadedState(loaded));
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  Future<void> getReservation() async {
+    try {
+      res = null;
+      emit(LoadingState());
+      res = await reservationService.getReservationInfo();
+      if (kDebugMode) {
+        print(res.toString());
+      }
+      emit(LoadedResState(res));
     } catch (e) {
       if (kDebugMode) {
         print(e);

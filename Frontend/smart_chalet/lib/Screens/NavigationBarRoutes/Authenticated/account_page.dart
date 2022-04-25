@@ -23,6 +23,12 @@ class AccountPage extends StatelessWidget {
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
+          Positioned(
+            top: 280,
+            child: Tshirt(opacity: 0.3),
+            width: 200,
+            height: 200,
+          ),
           const Positioned(top: -80, child: HeaderImageRound()),
           const Positioned(
             top: 80,
@@ -44,8 +50,16 @@ class AccountPage extends StatelessWidget {
                             offset: Offset.zero,
                             blurRadius: 20)
                       ]))),
-          const Positioned(top: 370, child: ReservationUserButton()),
-          const Positioned(top: 480, child: LogOutButton()),
+          const Positioned(
+              top: 260,
+              child: Text(
+                'we\'re glad to have you here',
+                style: TextStyle(color: _mainPageColor),
+              )),
+          const Positioned(top: 440, left: 50, child: LeftLeaf()),
+          const Positioned(top: 490, right: 65, child: RightLeaf()),
+          const Positioned(top: 470, child: ReservationUserButton()),
+          const Positioned(top: 560, child: LogOutButton()),
         ],
       ),
     );
@@ -114,7 +128,7 @@ class LogOutButton extends StatelessWidget {
     return AnimatedButton(
       height: 50,
       width: 100,
-      color: const Color.fromARGB(255, 253, 210, 210),
+      color: const Color.fromARGB(255, 251, 127, 118),
       onPressed: () async {
         BlocProvider.of<AppCubits>(context).logOut();
       },
@@ -143,7 +157,9 @@ class ReservationUserButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedButton(
       color: Colors.white,
-      onPressed: () {},
+      onPressed: () {
+        BlocProvider.of<AppCubits>(context).getReservation();
+      },
       child: const Text(
         'My Reservations',
         textAlign: TextAlign.center,
