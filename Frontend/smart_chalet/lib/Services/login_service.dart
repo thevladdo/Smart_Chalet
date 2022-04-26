@@ -6,16 +6,17 @@ import 'package:smart_chalet/Services/basic_auth.dart';
 import '../Model/auth_credential.dart';
 import 'Exception/backend_exception.dart';
 
-///Return token as Bearer String
 class LoginService {
   String baseUrl = "http://localhost:8080/smartchalet";
   var apiUrl = '/auth/public/login';
 
   Future<AppUser>? login(String mail, String password, Role role) async {
+    String encodedPsw = base64.encode(utf8.encode(password));
+
     http.Response res = await http.post(Uri.parse(baseUrl + apiUrl),
         body: jsonEncode({
           'mail': mail,
-          'password': password,
+          'password': encodedPsw,
           'role': roleToString(Role.CLIENT),
         }),
         headers: BasicAuthConfig().getBaseHeader());
