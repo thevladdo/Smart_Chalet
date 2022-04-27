@@ -5,7 +5,7 @@
 ---
 
 <p align= "center">  
-<b>Smart Chalet</b> è progetto realizzato in <b>Flutter</b> e <b>Spring-Boot</b> per il corso di laurea <b>L-31</b> presso <b>Università di Camerino</b>, nell’anno accademico <b>2020/2021</b>, dagli studenti <b>Vlad Dogariu</b> e <b>Pagan Denise</b> per gli esami di <b>Ingegneria del Software</b> e <b>Progettazione di Applicazioni Web e Mobili</b> seguendo i canoni di sviluppo proposti.
+<b>Smart Chalet</b> è progetto realizzato in <b>Flutter</b> e <b>SpringBoot</b> per il corso di laurea di <b>Informatica L-31</b> presso l'<b>Università di Camerino</b>, nell’anno accademico <b>2021/2022</b>, dagli studenti <b>Vlad Dogariu</b> e <b>Denise Pagan</b> per gli esami di <b>Ingegneria del Software</b> e <b>Progettazione di Applicazioni Web e Mobili</b>, seguendo i canoni di sviluppo proposti.
 </p>
 <br>
 
