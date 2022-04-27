@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_chalet/Cubit/app_cubit_states.dart';
-import 'package:smart_chalet/Services/get_reservation.dart';
+import 'package:smart_chalet/Services/reservation_service.dart';
 import 'package:smart_chalet/Services/login_service.dart';
 import 'package:smart_chalet/Services/register_service.dart';
 import 'package:smart_chalet/Services/umbrella_service.dart';
@@ -56,6 +56,7 @@ class AppCubits extends Cubit<CubitStates> {
       }
       emit(LoadedResState(res));
     } catch (e) {
+      emit(ResNoFoundState());
       if (kDebugMode) {
         print(e);
       }

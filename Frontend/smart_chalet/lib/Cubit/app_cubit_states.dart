@@ -55,7 +55,9 @@ class LoadedUserState extends CubitStates {
   setName() {
     AppUser appUser = loadedUser[0];
     String name = appUser.getName;
+    String mail = appUser.getMail;
     GlobUser().setName(name);
+    GlobUser().setMail(mail);
   }
 
   @override
@@ -89,6 +91,11 @@ class RegErrorState extends CubitStates {
 }
 
 class LoginErrorState extends CubitStates {
+  @override
+  List<Object> get props => [];
+}
+
+class ResNoFoundState extends CubitStates {
   @override
   List<Object> get props => [];
 }

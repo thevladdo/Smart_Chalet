@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_chalet/Model/umbrella.dart';
 import 'Exception/backend_exception.dart';
 
 class UmbrellaService {
-  String baseUrl = "http://localhost:8080/smartchalet";
+  String baseUrl = FlutterConfig.get('API_URL');
   Future<List<Umbrella>> getInfo() async {
-    var apiUrl = '/beach/public/status';
+    var apiUrl = FlutterConfig.get('UMBRELLA_URL');
     http.Response res = await http.get(Uri.parse(baseUrl + apiUrl));
     //In res there is a json object and we need to decode it
     try {

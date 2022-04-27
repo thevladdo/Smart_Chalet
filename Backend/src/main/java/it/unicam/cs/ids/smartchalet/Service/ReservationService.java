@@ -43,6 +43,18 @@ public class ReservationService {
         } else return repository.findById(id).get();
     }
 
+    public Reservation getReservationByMail(String mail) {
+        if(!repository.existsByUserId(mail)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation do not exist");
+        } else {
+            for (Reservation r : repository.findAll()) {
+                if(r.getUserId().equals(mail))  return repository.findByUserId(mail).get();
+            }
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation do not exist");
+        }
+
+    }
+
     public Reservation updateReservation(@NonNull Reservation updated){
         Reservation old = repository.findById(updated.getId()).get();
         if (updated.getDate().before(new Date(System.currentTimeMillis()))
@@ -91,4 +103,5 @@ public class ReservationService {
             }
         }
     }
+
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_chalet/Model/app_user.dart';
 import 'package:smart_chalet/Services/basic_auth.dart';
@@ -7,8 +8,8 @@ import '../Model/auth_credential.dart';
 import 'Exception/backend_exception.dart';
 
 class LoginService {
-  String baseUrl = "http://localhost:8080/smartchalet";
-  var apiUrl = '/auth/public/login';
+  String baseUrl = FlutterConfig.get('API_URL');
+  var apiUrl = FlutterConfig.get('LOGIN_URL');
 
   Future<AppUser>? login(String mail, String password, Role role) async {
     String encodedPsw = base64.encode(utf8.encode(password));

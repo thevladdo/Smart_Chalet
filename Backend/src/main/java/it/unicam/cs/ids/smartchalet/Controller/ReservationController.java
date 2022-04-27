@@ -40,6 +40,12 @@ public class ReservationController {
         return service.getReservation(id);
     }
 
+    @GetMapping("/getByUser/{mail}")
+    @PreAuthorize("(hasAuthority('MANAGER') or hasAuthority('CLIENT') or hasAuthority('RECEPTION_STAFF'))")
+    public Reservation getReservationByMail(@PathVariable @Param("mail") String mail){
+        return service.getReservationByMail(mail);
+    }
+
     @PutMapping("/update")
     @PreAuthorize("(hasAuthority('MANAGER') or hasAuthority('CLIENT') or hasAuthority('RECEPTION_STAFF')) " +
             "and (@accessCheckerComponent.sameUser(principal, #reservation.getUserId()) or hasAuthority('RECEPTION_STAFF'))")

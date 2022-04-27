@@ -1,17 +1,20 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_chalet/Model/reservation.dart';
 import 'package:smart_chalet/Services/basic_auth.dart';
+import 'package:smart_chalet/Utilities/account_details.dart';
 import 'Exception/backend_exception.dart';
 
 class ReservationService {
-  String baseUrl = "http://localhost:8080/smartchalet";
+  String baseUrl = FlutterConfig.get('API_URL');
   Future<Reservation> getReservationInfo() async {
-    String reservationId = 'dd4d6e9d-329f-440e-94e6-3df042f21302';
-    var apiUrl = '/reserve/get/' + reservationId;
+    String userId = GlobUser.mail;
+    String apiUrl = FlutterConfig.get('RESERVATION_URL');
+    String callUrl = '$apiUrl$userId';
     http.Response res = await http.get(
-      Uri.parse(baseUrl + apiUrl),
+      Uri.parse(baseUrl + callUrl),
       headers: BasicAuthConfig().getUserHeader(),
     );
     //In res there is a json object and we need to decode it

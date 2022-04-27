@@ -41,6 +41,8 @@ dependencies:
   date_time_picker: ^2.1.0
   syncfusion_flutter_datepicker: ^20.1.50
 
+  flutter_config: ^2.0.0
+
 dev_dependencies: 
   flutter_launcher_icons:
     git:
